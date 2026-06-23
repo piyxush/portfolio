@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:auto; }
+  body{ margin:0; background:#08090b; color:#f2f3f5; font-family:'Barlow',system-ui,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  ::selection{ background:var(--accent,#ff4d2e); color:#08090b; }
+  body::-webkit-scrollbar{ width:9px; }
+  body::-webkit-scrollbar-track{ background:#0c0e11; }
+  body::-webkit-scrollbar-thumb{ background:#262a30; }
+  @keyframes scanmove{ 0%{ background-position:0 0; } 100%{ background-position:0 -1000px; } }
+  @keyframes blink{ 0%,55%{ opacity:1; } 56%,100%{ opacity:.18; } }
+  @keyframes floaty{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-7px); } }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</helmet>
+
+<div style="position:fixed; inset:0; z-index:-4; background:#08090b;"></div>
+<canvas data-three style="position:fixed; inset:0; width:100%; height:100%; z-index:-3; display:block;"></canvas>
+<div style="position:fixed; inset:0; z-index:-2; pointer-events:none; background:linear-gradient(180deg, rgba(8,9,11,0.46) 0%, rgba(8,9,11,0.6) 50%, rgba(8,9,11,0.72) 100%);"></div>
+<div style="position:fixed; inset:0; z-index:-1; pointer-events:none; mix-blend-mode:screen; background:
+  radial-gradient(300px circle at var(--mx,50%) var(--my,40%), color-mix(in srgb, var(--accent,#ff4d2e) 24%, transparent), transparent 70%),
+  radial-gradient(780px circle at var(--mx,50%) var(--my,40%), color-mix(in srgb, var(--accent,#ff4d2e) 11%, transparent), transparent 66%);"></div>
+
+<div data-progress style="position:fixed; top:0; left:0; height:3px; width:100%; transform:scaleX(0); transform-origin:0 50%; background:var(--accent,#ff4d2e); z-index:60; box-shadow:0 0 14px var(--accent,#ff4d2e);"></div>
+
+<div style="position:fixed; top:26px; left:30px; z-index:55; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:#7b818b;">
+  <span style="color:var(--accent,#ff4d2e);">●</span>&nbsp; P. NIKAM / ENGINEER
+</div>
+
+<nav style="position:fixed; right:28px; top:50%; transform:translateY(-50%); z-index:55; display:flex; flex-direction:column; gap:18px;">
+  <sc-for list="{{ sections }}" as="s" hint-placeholder-count="7">
+    <div data-nav-index onClick="{{ s.go }}" style="display:flex; align-items:center; gap:12px; justify-content:flex-end; cursor:pointer; opacity:.4; transition:opacity .35s ease;">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#cdd2d8;">{{ s.label }}</span>
+      <span data-nav-dot style="width:8px; height:8px; border-radius:50%; background:var(--accent,#ff4d2e); flex:none; transition:transform .35s ease; transform:scale(.55);"></span>
+    </div>
+  </sc-for>
+</nav>
+
+<!-- HERO -->
+<section id="about" data-section style="min-height:100vh; display:flex; align-items:center; padding:120px 8vw 90px; position:relative;">
+  <div style="width:100%; max-width:1180px; margin:0 auto;">
+    <div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.34em; text-transform:uppercase; color:var(--accent,#ff4d2e); margin-bottom:22px; display:flex; align-items:center; gap:12px;">
+        <span style="width:38px; height:1px; background:var(--accent,#ff4d2e); display:inline-block;"></span>
+        Design Engineer · Autonomous Systems
+      </div>
+      <h1 data-hero-title style="font-family:'Saira Condensed',sans-serif; font-weight:800; font-size:clamp(58px,9vw,138px); line-height:.88; letter-spacing:-.01em; margin:0; text-transform:uppercase;">
+        Piyush<br><span style="color:var(--accent,#ff4d2e);">Nikam</span>
+      </h1>
+      <p style="max-width:520px; margin:30px 0 0; font-size:17px; line-height:1.65; color:#aab0b8; font-weight:300;">
+        Automobile design engineer specialising in wiring-harness systems for commercial &amp; defence vehicles — now pursuing an M.Eng. in AI Engineering of Autonomous Systems at TH&nbsp;Ingolstadt.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; margin-top:36px;">
+        <a href="/cdn-cgi/l/email-protection#d1a1b8a8a4a2b9ffbfb8bab0bc91b6bcb0b8bdffb2bebc" style="display:inline-flex; align-items:center; gap:10px; padding:13px 24px; background:var(--accent,#ff4d2e); color:#08090b; text-decoration:none; font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; border-radius:2px;" style-hover="filter:brightness(1.12)">Get in touch</a>
+        <a href="https://linkedin.com/in/piyush-nikam" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:10px; padding:13px 24px; background:transparent; color:#e7eaee; text-decoration:none; border:1px solid rgba(255,255,255,0.18); font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; border-radius:2px;" style-hover="border-color:var(--accent,#ff4d2e); color:var(--accent,#ff4d2e)">LinkedIn</a>
+        <a href="https://github.com/piyxush" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:10px; padding:13px 24px; background:transparent; color:#e7eaee; text-decoration:none; border:1px solid rgba(255,255,255,0.18); font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; border-radius:2px;" style-hover="border-color:var(--accent,#ff4d2e); color:var(--accent,#ff4d2e)">GitHub</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="position:absolute; bottom:34px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#5f656e; display:flex; flex-direction:column; align-items:center; gap:8px; animation:floaty 2.6s ease-in-out infinite;">
+    Scroll
+    <span style="width:1px; height:30px; background:linear-gradient(to bottom,var(--accent,#ff4d2e),transparent);"></span>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" data-section style="padding:90px 8vw; max-width:1180px; margin:0 auto;">
+  <div data-panel style="will-change:transform,opacity; transform-origin:center;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:8px;">// 02 — EXPERIENCE</div>
+    <h2 style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(40px,5vw,72px); line-height:.95; margin:0 0 50px; text-transform:uppercase; letter-spacing:-.01em;">Where I've built</h2>
+  </div>
+  <sc-for list="{{ experiences }}" as="x" hint-placeholder-count="2">
+    <div data-panel style="will-change:transform,opacity; transform-origin:center; background:linear-gradient(180deg, rgba(13,15,19,0.85), rgba(10,12,15,0.74)); border:1px solid rgba(255,255,255,0.08); border-left:2px solid var(--accent,#ff4d2e); border-radius:4px; padding:32px 34px; margin-bottom:24px; display:grid; grid-template-columns:1fr auto; gap:28px;">
+      <div>
+        <h3 style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:28px; margin:0; letter-spacing:.01em;">{{ x.role }}</h3>
+        <div style="color:var(--accent,#ff4d2e); font-weight:600; font-size:15px; margin:4px 0 18px; font-family:'JetBrains Mono',monospace; letter-spacing:.04em;">{{ x.org }}</div>
+        <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px;">
+          <sc-for list="{{ x.bullets }}" as="b" hint-placeholder-count="4">
+            <li style="position:relative; padding-left:22px; font-size:15px; line-height:1.55; color:#aeb4bc; font-weight:300;">
+              <span style="position:absolute; left:0; top:9px; width:7px; height:7px; background:var(--accent,#ff4d2e); transform:rotate(45deg);"></span>{{ b }}
+            </li>
+          </sc-for>
+        </ul>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.08em; color:#cdd2d8; white-space:nowrap; text-align:right; align-self:start; padding-top:6px;">{{ x.date }}</div>
+    </div>
+  </sc-for>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" data-section style="padding:90px 8vw; max-width:1180px; margin:0 auto;">
+  <div data-panel style="will-change:transform,opacity; transform-origin:center;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:8px;">// 03 — EDUCATION</div>
+    <h2 style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(40px,5vw,72px); line-height:.95; margin:0 0 50px; text-transform:uppercase; letter-spacing:-.01em;">Academic track</h2>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+    <sc-for list="{{ education }}" as="e" hint-placeholder-count="2">
+      <div data-panel style="will-change:transform,opacity; transform-origin:center; background:linear-gradient(180deg, rgba(13,15,19,0.85), rgba(10,12,15,0.74)); border:1px solid rgba(255,255,255,0.08); border-radius:4px; padding:30px 32px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--accent,#ff4d2e); margin-bottom:14px;">{{ e.date }}</div>
+        <h3 style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:25px; line-height:1.05; margin:0 0 10px;">{{ e.school }}</h3>
+        <div style="font-size:15px; font-weight:500; color:#e2e6ea;">{{ e.degree }}</div>
+        <div style="font-size:14px; color:#9aa0a8; margin-top:3px; font-weight:300;">{{ e.field }}</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#cdd2d8; margin-top:16px;">{{ e.note }}</div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" data-section style="padding:90px 8vw; max-width:1180px; margin:0 auto;">
+  <div data-panel style="will-change:transform,opacity; transform-origin:center;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:8px;">// 04 — SKILLS</div>
+    <h2 style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(40px,5vw,72px); line-height:.95; margin:0 0 50px; text-transform:uppercase; letter-spacing:-.01em;">Technical stack</h2>
+  </div>
+  <div data-panel style="will-change:transform,opacity; transform-origin:center; display:flex; flex-wrap:wrap; gap:12px; margin-bottom:40px;">
+    <sc-for list="{{ skills }}" as="sk" hint-placeholder-count="12">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:.03em; color:#dde1e6; padding:11px 18px; border:1px solid rgba(255,255,255,0.1); border-radius:2px; background:rgba(12,14,18,0.66);">{{ sk }}</span>
+    </sc-for>
+  </div>
+  <div data-panel style="will-change:transform,opacity; transform-origin:center;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; color:#7b818b; text-transform:uppercase; margin-bottom:18px;">Beyond the tools</div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+      <sc-for list="{{ softSkills }}" as="ss" hint-placeholder-count="3">
+        <div style="border-top:2px solid var(--accent,#ff4d2e); padding-top:16px;">
+          <h4 style="font-family:'Saira Condensed',sans-serif; font-weight:600; font-size:20px; margin:0 0 8px; text-transform:uppercase; letter-spacing:.01em;">{{ ss.title }}</h4>
+          <p style="font-size:14px; line-height:1.55; color:#9aa0a8; margin:0; font-weight:300;">{{ ss.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" data-section style="padding:90px 8vw; max-width:1180px; margin:0 auto;">
+  <div data-panel style="will-change:transform,opacity; transform-origin:center;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:8px;">// 05 — PROJECTS</div>
+    <h2 style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(40px,5vw,72px); line-height:.95; margin:0 0 50px; text-transform:uppercase; letter-spacing:-.01em;">Selected work</h2>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+    <sc-for list="{{ projects }}" as="p" hint-placeholder-count="6">
+      <div data-panel style="will-change:transform,opacity; transform-origin:center; background:linear-gradient(180deg, rgba(13,15,19,0.85), rgba(10,12,15,0.74)); border:1px solid rgba(255,255,255,0.08); border-radius:4px; padding:30px 32px; display:flex; flex-direction:column;" style-hover="border-color:var(--accent,#ff4d2e)">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:14px; margin-bottom:14px;">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:34px; font-weight:700; color:rgba(255,255,255,0.1); line-height:1;">{{ p.n }}</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.06em; color:#cdd2d8; text-align:right; white-space:nowrap;">{{ p.date }}</span>
+        </div>
+        <h3 style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:26px; line-height:1.05; margin:0 0 6px; letter-spacing:.01em;">{{ p.name }}</h3>
+        <div style="color:var(--accent,#ff4d2e); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.04em; margin-bottom:14px; min-height:14px;">{{ p.role }}</div>
+        <p style="font-size:14.5px; line-height:1.6; color:#a6acb4; margin:0; font-weight:300;">{{ p.desc }}</p>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs" data-section style="padding:90px 8vw; max-width:1180px; margin:0 auto;">
+  <div data-panel style="will-change:transform,opacity; transform-origin:center;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:8px;">// 06 — CERTIFICATIONS</div>
+    <h2 style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(40px,5vw,72px); line-height:.95; margin:0 0 50px; text-transform:uppercase; letter-spacing:-.01em;">Credentials</h2>
+  </div>
+  <sc-for list="{{ certs }}" as="c" hint-placeholder-count="5">
+    <div data-panel style="will-change:transform,opacity; transform-origin:center; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:22px; padding:22px 26px; border-bottom:1px solid rgba(255,255,255,0.08);">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent,#ff4d2e);">{{ c.n }}</span>
+      <span style="font-family:'Saira Condensed',sans-serif; font-weight:600; font-size:22px; letter-spacing:.01em;">{{ c.title }}</span>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.05em; color:#9aa0a8; text-align:right;">{{ c.issuer }}</span>
+    </div>
+  </sc-for>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" data-section style="padding:120px 8vw 100px; max-width:1180px; margin:0 auto;">
+  <div data-panel style="will-change:transform,opacity; transform-origin:center; text-align:center;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:18px;">// 07 — CONTACT</div>
+    <h2 style="font-family:'Saira Condensed',sans-serif; font-weight:800; font-size:clamp(46px,7vw,104px); line-height:.92; margin:0 0 16px; text-transform:uppercase; letter-spacing:-.01em;">Let's build<br><span style="color:var(--accent,#ff4d2e);">something</span></h2>
+    <p style="font-size:16px; color:#9aa0a8; max-width:480px; margin:0 auto 36px; font-weight:300;">Open to design-engineering and autonomous-systems roles across Europe.</p>
+    <a href="/cdn-cgi/l/email-protection#80f0e9f9f5f3e8aeeee9ebe1edc0e7ede1e9ecaee3efed" style="display:inline-block; font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(22px,3vw,38px); color:#f2f3f5; text-decoration:none; border-bottom:2px solid var(--accent,#ff4d2e); padding-bottom:4px; letter-spacing:.01em;" style-hover="color:var(--accent,#ff4d2e)"><span class="__cf_email__" data-cfemail="394950404c4a51175750525854795e54585055175a5654">[email&#160;protected]</span></a>
+    <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:26px; margin-top:40px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.08em; color:#cdd2d8;">
+      <a href="https://linkedin.com/in/piyush-nikam" target="_blank" rel="noopener noreferrer" style="color:#cdd2d8; text-decoration:none;" style-hover="color:var(--accent,#ff4d2e)">LINKEDIN ↗</a>
+      <a href="https://github.com/piyxush" target="_blank" rel="noopener noreferrer" style="color:#cdd2d8; text-decoration:none;" style-hover="color:var(--accent,#ff4d2e)">GITHUB ↗</a>
+      <span>+49 15510717398</span>
+      <span>INGOLSTADT · BAVARIA · DE</span>
+    </div>
+  </div>
+  <div style="margin-top:80px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#5f656e;">
+    <span>© {{ year }} Piyush Nikam</span>
+    <span>Designed &amp; engineered</span>
+  </div>
+</section>
+</x-dc>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#ff4d2e&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;enable3D&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;intensity&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:2,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#ff4d2e';
+    const mk = (id) => () => {
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 40, behavior: 'smooth' });
+    };
+    return {
+      year: new Date().getFullYear(),
+      sections: [
+        { label: 'Intro', go: mk('about') },
+        { label: 'Experience', go: mk('experience') },
+        { label: 'Education', go: mk('education') },
+        { label: 'Skills', go: mk('skills') },
+        { label: 'Projects', go: mk('projects') },
+        { label: 'Certs', go: mk('certs') },
+        { label: 'Contact', go: mk('contact') },
+      ],
+      experiences: [
+        {
+          role: 'Design Engineer', org: 'Tata Technologies Limited', date: 'Oct 2022 — Sep 2025',
+          bullets: [
+            "Designed end-to-end wiring harnesses for Tata Motors' Heavy Commercial Defence Platform using CATIA V5 Electrical & Capital Harness System.",
+            'Performed DFM, DFA & DFMEA validations — identifying early failure modes and implementing mitigations for defence-grade robustness.',
+            'Implemented EMI/EMC considerations across the CAN subsystem to minimise electrical interference.',
+            'Resolved supplier DFM queries through design-release (DR) stages, reducing production bottlenecks and ensuring manufacturability.',
+            'Filed 2 design patents and delivered 4 BRD-driven solutions that improved day-to-day workflow efficiency.',
+          ],
+        },
+        {
+          role: 'Intern — Advanced Technology & Automation', org: 'Bajaj Auto Limited', date: 'Jan 2022 — Jun 2022',
+          bullets: [
+            'Built a wireless remote I/O system on ESP microcontrollers enabling PLC–sensor communication at just 7% of market cost.',
+            'Programmed a PLC to detect gear-drum variants via inductive proximity sensors, eliminating manual line errors.',
+            'Developed an HMI for the engine firing bed, improving test-cycle efficiency.',
+            'Designed a Raspberry Pi Andon system at 5% of commercial cost delivering real-time production alerts.',
+          ],
+        },
+      ],
+      education: [
+        { school: 'Technische Hochschule Ingolstadt', degree: 'Master of Engineering', field: 'AI Engineering of Autonomous Systems', date: 'Oct 2025 — Present', note: 'In progress' },
+        { school: 'Dr. Babasaheb Ambedkar Technological University', degree: 'Bachelor of Technology', field: 'Electrical Engineering', date: 'Aug 2018 — Jul 2022', note: 'CGPA 9.4 · Rank 1' },
+      ],
+      skills: ['Python', 'MATLAB & Simulink', 'CATIA V5 Electrical', 'IPG CarMaker', 'SolidWorks', 'Ansys', 'TensorFlow', 'Siemens TIA Portal', 'LibrePCB', 'Proteus', 'Git & GitHub', 'HTML / CSS'],
+      softSkills: [
+        { title: 'Leadership', desc: 'Led the team as Vice-Captain through the eBAJA 2021 season (SAEINDIA).' },
+        { title: 'Dedication', desc: 'Consistent Rank 1 across all four years of the Bachelor programme.' },
+        { title: 'Curiosity', desc: 'Continually learning technologies well beyond the curriculum.' },
+      ],
+      projects: [
+        { n: '01', name: 'Formula Student Germany', role: 'Design Engineer', date: 'Oct 2025 — Present', desc: 'Designing the wiring harness for Schanzer Racing Electric (SRe26), TH Ingolstadt.' },
+        { n: '02', name: 'eBAJA · SAEINDIA', role: 'Vice Captain & Head Design', date: 'Jan 2020 — Jul 2021', desc: 'Led Team Squadron; designed the full vehicle in SolidWorks, ran FMEA in ANSYS and simulated in IPG CarMaker. National Rank 1 — Best 4WD Design.' },
+        { n: '03', name: 'Wireless CAN', role: 'Tata Motors Limited', date: 'Sep 2024 — Aug 2025', desc: 'A device for wireless communication between vehicle MCUs (EMS ECU, TCU, GDCU…), replacing the wired CAN bus. Patent in progress.' },
+        { n: '04', name: 'Home Automation', role: 'Hobbyist', date: 'Mar 2021 — Present', desc: 'End-to-end Raspberry Pi 4B + Home Assistant system integrating sensors, actuators & media over WiFi, Zigbee, Thread & BLE with custom ESP modules.' },
+        { n: '05', name: 'Wireless Remote I/O', role: 'Bajaj Auto Limited', date: 'Mar 2022 — Jun 2022', desc: 'Commissioned a wireless link between two PLC panels on the assembly line using ESP MCUs, optocouplers & potentiometers — at 10% of market cost.' },
+        { n: '06', name: 'Water Level Controller', role: 'Personal', date: 'Sep 2019', desc: 'Ultrasonic level sensing feeding an ESP32 that drives the pump via relay to prevent overhead-tank overflow.' },
+      ],
+      certs: [
+        { n: 'C1', title: 'Industrial Automation — PLC & Sensor Interfacing', issuer: 'Siemens' },
+        { n: 'C2', title: 'Entrepreneurship Essentials', issuer: 'IIT Kharagpur' },
+        { n: 'C3', title: 'Electric Power Systems', issuer: 'State University of New York' },
+        { n: 'C4', title: 'Modelling & Debugging Embedded Systems', issuer: 'University of Colorado Boulder' },
+        { n: 'C5', title: 'World Class Quality (WCQ) 4', issuer: 'Tata Motors Limited' },
+      ],
+    };
+  }
+
+  componentDidMount() {
+    this.mouse = { x: 0.5, y: 0.4 };
+    this.onMove = (e) => { this.mouse.x = e.clientX / window.innerWidth; this.mouse.y = e.clientY / window.innerHeight; };
+    window.addEventListener('pointermove', this.onMove, { passive: true });
+
+    const tick = () => {
+      const enabled = this.props.enable3D ?? true;
+      const intensity = this.props.intensity ?? 1;
+      const accent = this.props.accent ?? '#ff4d2e';
+      const root = document.documentElement;
+      root.style.setProperty('--accent', accent);
+      root.style.setProperty('--mx', (this.mouse.x * 100).toFixed(2) + '%');
+      root.style.setProperty('--my', (this.mouse.y * 100).toFixed(2) + '%');
+
+      const vh = window.innerHeight;
+      document.querySelectorAll('[data-panel]').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const d = (r.top + r.height / 2 - vh / 2) / vh;
+        const ad = Math.abs(d);
+        if (enabled) {
+          const rot = Math.max(-1, Math.min(1, d)) * -13 * intensity;
+          const tz = -Math.min(ad, 1.2) * 240 * intensity;
+          el.style.transform = `perspective(1400px) rotateX(${rot.toFixed(2)}deg) translateZ(${tz.toFixed(1)}px)`;
+          el.style.opacity = (1 - Math.min(ad * 0.8, 0.72)).toFixed(3);
+        } else {
+          el.style.transform = '';
+          el.style.opacity = '';
+        }
+      });
+
+      const hero = document.querySelector('[data-hero-title]');
+      if (hero) hero.style.transform = `translateY(${(window.scrollY * -0.12).toFixed(1)}px)`;
+
+      const tilt = document.querySelector('[data-tilt]');
+      if (tilt) {
+        if (enabled) {
+          const rx = (this.mouse.y - 0.5) * -14 * intensity;
+          const ry = (this.mouse.x - 0.5) * 16 * intensity;
+          tilt.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+        } else { tilt.style.transform = ''; }
+      }
+
+      const secs = document.querySelectorAll('[data-section]');
+      let active = 0;
+      secs.forEach((el, i) => { if (el.getBoundingClientRect().top <= vh * 0.35) active = i; });
+      document.querySelectorAll('[data-nav-index]').forEach((el, i) => {
+        const on = i === active;
+        el.style.opacity = on ? '1' : '0.4';
+        const dot = el.querySelector('[data-nav-dot]');
+        if (dot) dot.style.transform = on ? 'scale(1.3)' : 'scale(0.55)';
+      });
+
+      const max = document.body.scrollHeight - vh;
+      const p = max > 0 ? window.scrollY / max : 0;
+      const bar = document.querySelector('[data-progress]');
+      if (bar) bar.style.transform = `scaleX(${p.toFixed(4)})`;
+
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+    this.initThree();
+  }
+
+  initThree() {
+    const canvas = document.querySelector('[data-three]');
+    if (!canvas) return;
+    const THREE = window.THREE;
+    if (!THREE) { this._threeTimer = setTimeout(() => this.initThree(), 120); return; }
+
+    let accentHex = this.props.accent ?? '#ff4d2e';
+    const accent = new THREE.Color(accentHex);
+    const cell = 1;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x08090b, 0.034);
+    const camera = new THREE.PerspectiveCamera(54, 16 / 9, 0.1, 160);
+    camera.position.set(0, 4.4, 12);
+
+    const fit = () => {
+      const w = canvas.clientWidth || 1, h = canvas.clientHeight || 1;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+    };
+
+    const grid = new THREE.GridHelper(140, 140, accent.clone(), new THREE.Color(0x171c22));
+    grid.position.y = -0.6;
+    grid.material.transparent = true; grid.material.opacity = 0.5;
+    scene.add(grid);
+
+    const lane = new THREE.Group();
+    const dashGeo = new THREE.BoxGeometry(0.14, 0.02, 1.1);
+    const dashMat = new THREE.MeshBasicMaterial({ color: 0xc8ccd2, transparent: true, opacity: 0.5 });
+    for (let z = -50; z <= 14; z += 2.6) {
+      [-1.85, 1.85].forEach((lx) => { const d = new THREE.Mesh(dashGeo, dashMat); d.position.set(lx, -0.58, z); lane.add(d); });
+    }
+    scene.add(lane);
+
+    const mkEdges = (geo, color, op) => new THREE.LineSegments(
+      new THREE.EdgesGeometry(geo),
+      new THREE.LineBasicMaterial({ color, transparent: true, opacity: op })
+    );
+
+    const car = new THREE.Group();
+    const bodyMat = []; 
+    const body = mkEdges(new THREE.BoxGeometry(2, 0.6, 4.2), accent.clone(), 0.95);
+    const cabin = mkEdges(new THREE.BoxGeometry(1.7, 0.7, 2), accent.clone(), 0.95);
+    cabin.position.set(0, 0.55, -0.2);
+    const fill = new THREE.Mesh(new THREE.BoxGeometry(2, 0.6, 4.2), new THREE.MeshBasicMaterial({ color: accent.clone(), transparent: true, opacity: 0.07 }));
+    bodyMat.push(body.material, cabin.material, fill.material);
+    car.add(fill, body, cabin);
+    const wheelGeo = new THREE.CylinderGeometry(0.34, 0.34, 0.3, 16);
+    [[-0.95, 1.45], [0.95, 1.45], [-0.95, -1.45], [0.95, -1.45]].forEach(([wx, wz]) => {
+      const w = new THREE.Mesh(wheelGeo, new THREE.MeshBasicMaterial({ color: 0x0c0e12 }));
+      w.rotation.z = Math.PI / 2; w.position.set(wx, -0.55, wz);
+      const we = new THREE.LineSegments(new THREE.EdgesGeometry(wheelGeo), new THREE.LineBasicMaterial({ color: accent.clone(), transparent: true, opacity: 0.6 }));
+      we.rotation.z = Math.PI / 2; we.position.set(wx, -0.55, wz);
+      car.add(w, we);
+    });
+    const roof = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.2, 0.26, 18), new THREE.MeshBasicMaterial({ color: accent.clone() }));
+    roof.position.set(0, 1.05, -0.2);
+    car.add(roof);
+    car.position.set(0, -0.3, 2.8);
+    scene.add(car);
+
+    const rings = [];
+    for (let i = 0; i < 4; i++) {
+      const r = new THREE.Mesh(
+        new THREE.RingGeometry(0.94, 1.0, 72),
+        new THREE.MeshBasicMaterial({ color: accent.clone(), transparent: true, opacity: 0.5, side: THREE.DoubleSide })
+      );
+      r.rotation.x = -Math.PI / 2; r.position.set(0, 1.18, -0.2); r.userData.phase = i / 4;
+      car.add(r); rings.push(r);
+    }
+
+    const N = 900;
+    const pos = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * 44;
+      pos[i * 3 + 1] = Math.random() * 5 - 0.5;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 70;
+    }
+    const pg = new THREE.BufferGeometry();
+    pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const points = new THREE.Points(pg, new THREE.PointsMaterial({ color: accent.clone(), size: 0.06, transparent: true, opacity: 0.5 }));
+    scene.add(points);
+
+    const detections = [];
+    const lanes = [-3.4, 3.4, -3.2];
+    for (let i = 0; i < 3; i++) {
+      const d = mkEdges(new THREE.BoxGeometry(1.8, 1.1, 3.4), new THREE.Color(0xd6dbe1), 0.8);
+      d.position.set(lanes[i], -0.1, -14 - i * 13);
+      scene.add(d); detections.push(d);
+    }
+
+    fit();
+    this._onResize = fit;
+    window.addEventListener('resize', this._onResize, { passive: true });
+
+    const clock = new THREE.Clock();
+    const tintTargets = [...bodyMat, ...rings.map(r => r.material), points.material, roof.material];
+    this.three = { renderer, scene };
+
+    const render = () => {
+      const dt = Math.min(clock.getDelta(), 0.05);
+      const t = clock.getElapsedTime();
+
+      const cur = this.props.accent ?? '#ff4d2e';
+      if (cur !== accentHex) { accentHex = cur; const c = new THREE.Color(cur); tintTargets.forEach(m => m.color.set(c)); }
+
+      grid.position.z = (t * 4) % cell;
+      lane.position.z = (t * 4) % 2.6;
+      rings.forEach((r) => {
+        const s = (t * 0.32 + r.userData.phase) % 1;
+        const sc = 0.5 + s * 15;
+        r.scale.set(sc, sc, sc);
+        r.material.opacity = 0.5 * (1 - s);
+      });
+      points.rotation.y += dt * 0.04;
+      detections.forEach((d) => {
+        d.position.z += dt * 6;
+        if (d.position.z > 16) d.position.z -= 56;
+        d.position.y = -0.1 + Math.sin(t * 1.4 + d.position.x) * 0.05;
+      });
+      car.rotation.y = Math.sin(t * 0.3) * 0.05;
+
+      const tx = (this.mouse.x - 0.5) * 5.5;
+      const ty = 4.4 - (this.mouse.y - 0.5) * 2.4;
+      camera.position.x += (tx - camera.position.x) * 0.05;
+      camera.position.y += (ty - camera.position.y) * 0.05;
+      camera.lookAt(0, 0.5, -7);
+
+      renderer.render(scene, camera);
+      this.threeRaf = requestAnimationFrame(render);
+    };
+    this.threeRaf = requestAnimationFrame(render);
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.raf);
+    cancelAnimationFrame(this.threeRaf);
+    clearTimeout(this._threeTimer);
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this.three && this.three.renderer) this.three.renderer.dispose();
+    window.removeEventListener('pointermove', this.onMove);
+  }
+}
+</script>
+</body>
+</html>
