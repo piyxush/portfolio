@@ -358,9 +358,10 @@ class Component extends DCLogic {
             .then(s => { if (s === 'granted') setupGyro(); })
             .catch(() => {});
         }, { once: true });
-      } else {
-        setupGyro(); // Android and others
+      } else if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        setupGyro(); // Android and other touch-only devices
       }
+      // Desktop: DeviceOrientationEvent exists but pointermove takes over — don't call setupGyro
     }
 
     const tick = () => {
