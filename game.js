@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  window.ADGame = { init: initGame, start: startGame, stop: stopGame, exit: exitGame };
+  window.ADGame = { init: initGame, start: startGame, stop: stopGame, exit: exitGame, toggleAP, apOn: () => !!(state && state.ap) };
 
   const ACC = '#ff4d2e';
   const ROAD_RATIO = 0.52;
@@ -160,6 +160,7 @@
     state.ap = !state.ap;
     state.apState = 'CRUISING';
     state.apTimer = 0;
+    syncAPBtn();
   }
 
   function exitGame() {
@@ -174,9 +175,19 @@
 
   // ─── LOOP ─────────────────────────────────────────────────────────
 
+  function syncAPBtn() {
+    const btn = document.getElementById('game-ap-btn');
+    if (!btn) return;
+    const on = !!(state && state.ap);
+    btn.classList.toggle('ap-active', on);
+    const lbl = btn.querySelector('.ap-label');
+    if (lbl) lbl.textContent = on ? '● AUTO ON' : '○ AUTOPILOT';
+  }
+
   function startGame() {
     stopGame();
     state = mkState();
+    syncAPBtn();
     let last = performance.now();
     function loop(now) {
       const dt = Math.min((now - last) / 1000, 0.05);
