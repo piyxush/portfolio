@@ -343,8 +343,8 @@ class Component extends DCLogic {
     // Gyroscope for mobile — replaces pointermove when active
     this.onGyro = (e) => {
       if (e.gamma === null && e.beta === null) return;
-      this.mouse.x = 0.5 + Math.max(-1, Math.min(1, (e.gamma || 0) / 45)) * 0.4;
-      this.mouse.y = 0.5 - Math.max(-1, Math.min(1, ((e.beta || 45) - 45) / 45)) * 0.3;
+      this.mouse.x = 0.5 + Math.max(-1, Math.min(1, (e.gamma || 0) / 20)) * 0.45;
+      this.mouse.y = 0.5 - Math.max(-1, Math.min(1, ((e.beta || 45) - 45) / 25)) * 0.4;
     };
     const setupGyro = () => {
       window.removeEventListener('pointermove', this.onMove);
@@ -352,12 +352,12 @@ class Component extends DCLogic {
     };
     if ('DeviceOrientationEvent' in window) {
       if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-        // iOS 13+ — request on first touch
-        document.addEventListener('touchstart', function askGyro() {
+        // iOS 13+ — click is reliably treated as user activation by Safari
+        document.addEventListener('click', function askGyro() {
           DeviceOrientationEvent.requestPermission()
             .then(s => { if (s === 'granted') setupGyro(); })
             .catch(() => {});
-        }, { once: true, passive: true });
+        }, { once: true });
       } else {
         setupGyro(); // Android and others
       }
