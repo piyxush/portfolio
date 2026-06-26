@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(python3 -m http.server 8743)",
+      "Bash(echo \"PID=$!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8743/)",
+      "Bash(DISPLAY=:0 google-chrome --new-window http://localhost:8743/)",
+      "Bash(import -window root -display :0 /tmp/portfolio-hero.png)",
+      "Bash(scrot -d 2 /tmp/portfolio-hero.png)",
+      "Read(//tmp/**)",
+      "Bash(xdpyinfo -display :0)",
+      "Bash(python3 -c \"import playwright; print\\('ok'\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(python3 -m playwright install chromium)"
+    ]
+  }
+}
