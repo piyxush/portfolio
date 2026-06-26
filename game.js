@@ -54,6 +54,10 @@
     return drops;
   }
 
+  function isMobile() {
+    return ('ontouchstart' in window || navigator.maxTouchPoints > 0) && window.innerWidth < 1000;
+  }
+
   function mkState() {
     return {
       px: laneX(1), py: canvas.height * 0.78,
@@ -85,6 +89,8 @@
       passedIds: new Set(),
       // Spawn ID counter
       nextId: 0,
+      // Mobile instruction screen
+      showMobileInstruction: isMobile(),
     };
   }
 
@@ -102,13 +108,13 @@
     }, { passive: true });
     canvas.addEventListener('touchend', e => {
       if (!state) return;
+      // Dismiss mobile instruction screen on tap
+      if (state.showMobileInstruction) { state.showMobileInstruction = false; return; }
       const t = e.changedTouches[0];
       const dx = t.clientX - touchSX, dy = t.clientY - touchSY;
       const z = getBtnZones();
       const inBtnRow = t.clientY > canvas.height - 90 && t.clientY < canvas.height - 20;
       if (inBtnRow) {
-        if (t.clientX < z.leftEnd) { changeLane(-1); return; }
-        if (t.clientX > z.rStart && t.clientX < z.rEnd) { changeLane(1); return; }
         if (t.clientX > z.apStart) { toggleAP(); return; }
       }
       if (state.dead) { startGame(); return; }
@@ -116,11 +122,10 @@
     }, { passive: true });
     canvas.addEventListener('click', e => {
       if (!state) return;
+      if (state.showMobileInstruction) { state.showMobileInstruction = false; return; }
       const z = getBtnZones();
       const inBtnRow = e.clientY > canvas.height - 90 && e.clientY < canvas.height - 20;
       if (inBtnRow) {
-        if (e.clientX < z.leftEnd) { changeLane(-1); return; }
-        if (e.clientX > z.rStart && e.clientX < z.rEnd) { changeLane(1); return; }
         if (e.clientX > z.apStart) { toggleAP(); return; }
       }
       if (state.dead) startGame();
@@ -192,8 +197,12 @@
     function loop(now) {
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
-      update(dt);
-      render();
+      if (state.showMobileInstruction) {
+        renderMobileInstruction();
+      } else {
+        update(dt);
+        render();
+      }
       rafId = requestAnimationFrame(loop);
     }
     rafId = requestAnimationFrame(loop);
@@ -915,9 +924,10 @@
     ctx.textAlign = 'left';
 
     if (state.t < 8 && !state.dead) {
+      const mobile = isMobile();
       const hint = state.ap
-        ? '[A] manual  ·  autopilot active'
-        : '[←][→] steer  ·  [A] autopilot  ·  [ESC] exit';
+        ? (mobile ? 'autopilot active' : '[A] manual  ·  autopilot active')
+        : (mobile ? 'swipe ← → to steer' : '[←][→] steer  ·  [A] autopilot  ·  [ESC] exit');
       ctx.textAlign = 'center';
       ctx.font = `9px 'JetBrains Mono', monospace`;
       ctx.fillStyle = mu;
@@ -1013,20 +1023,113 @@
 
   function drawMobileBtns(W, H, bg, bd, fg) {
     const bw = 64, bh = 50, by = H - 78, bp = 20;
-    const z = getBtnZones();
 
-    rrect(bp, by, bw, bh, 8, bg, bd);
-    rrect(z.rStart, by, bw, bh, 8, bg, bd);
+    // Only draw the AUTO button on mobile (no left/right arrows)
     rrect(W - bp - bw, by, bw, bh, 8, state.ap ? ACC : bg, bd);
 
     ctx.textAlign = 'center';
-    ctx.font = `bold 20px sans-serif`;
-    ctx.fillStyle = fg;
-    ctx.fillText('◀', bp + bw / 2, by + bh / 2 + 7);
-    ctx.fillText('▶', z.rStart + bw / 2, by + bh / 2 + 7);
     ctx.font = `bold 9px 'JetBrains Mono', monospace`;
     ctx.fillStyle = state.ap ? '#08090b' : fg;
     ctx.fillText('AUTO', W - bp - bw / 2, by + bh / 2 + 3);
+    ctx.textAlign = 'left';
+  }
+
+  function renderMobileInstruction() {
+    const W = canvas.width, H = canvas.height;
+    const dark = document.documentElement.getAttribute('data-theme') !== 'light';
+
+    // Background
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = dark ? '#08090b' : '#eeeff2';
+    ctx.fillRect(0, 0, W, H);
+
+    // Subtle grid pattern
+    ctx.fillStyle = dark ? 'rgba(255,255,255,0.015)' : 'rgba(0,0,0,0.03)';
+    const g = 48;
+    for (let x = 0; x < W; x += g) {
+      for (let y = 0; y < H; y += g) {
+        ctx.fillRect(x, y, 2, 2);
+      }
+    }
+
+    const cy = H * 0.42;
+    const pulse = (Math.sin(performance.now() * 0.003) + 1) / 2;
+
+    // Swipe icon: two arrows pointing left and right with a hand
+    const arrowW = 60;
+    const arrowY = cy;
+
+    // Left arrow with animated offset
+    const lOff = -6 - pulse * 12;
+    ctx.save();
+    ctx.globalAlpha = 0.35 + pulse * 0.4;
+    ctx.strokeStyle = ACC;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(W / 2 + lOff + 8, arrowY - 14);
+    ctx.lineTo(W / 2 + lOff - arrowW + 8, arrowY);
+    ctx.lineTo(W / 2 + lOff + 8, arrowY + 14);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(W / 2 + lOff - arrowW + 16, arrowY);
+    ctx.lineTo(W / 2 + lOff + 8, arrowY);
+    ctx.stroke();
+    ctx.restore();
+
+    // Right arrow with animated offset
+    const rOff = 6 + pulse * 12;
+    ctx.save();
+    ctx.globalAlpha = 0.35 + (1 - pulse) * 0.4;
+    ctx.strokeStyle = ACC;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(W / 2 + rOff - 8, arrowY - 14);
+    ctx.lineTo(W / 2 + rOff + arrowW - 8, arrowY);
+    ctx.lineTo(W / 2 + rOff - 8, arrowY + 14);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(W / 2 + rOff + arrowW - 16, arrowY);
+    ctx.lineTo(W / 2 + rOff - 8, arrowY);
+    ctx.stroke();
+    ctx.restore();
+
+    // Hand/finger icon (circle)
+    ctx.beginPath();
+    ctx.arc(W / 2, arrowY, 18, 0, Math.PI * 2);
+    ctx.strokeStyle = dark ? 'rgba(242,243,245,0.25)' : 'rgba(13,15,19,0.25)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = dark ? 'rgba(242,243,245,0.06)' : 'rgba(13,15,19,0.06)';
+    ctx.fill();
+
+    // Finger dot
+    ctx.beginPath();
+    ctx.arc(W / 2, arrowY, 5, 0, Math.PI * 2);
+    ctx.fillStyle = dark ? 'rgba(242,243,245,0.35)' : 'rgba(13,15,19,0.35)';
+    ctx.fill();
+
+    // Instruction text
+    ctx.textAlign = 'center';
+    ctx.font = `700 13px 'JetBrains Mono', monospace`;
+    ctx.fillStyle = dark ? 'rgba(242,243,245,0.85)' : 'rgba(13,15,19,0.85)';
+    ctx.fillText('SWIPE LEFT / RIGHT', W / 2, arrowY + 56);
+
+    ctx.font = `10px 'JetBrains Mono', monospace`;
+    ctx.fillStyle = dark ? 'rgba(170,176,184,0.6)' : 'rgba(80,87,106,0.6)';
+    ctx.fillText('to move the vehicle', W / 2, arrowY + 76);
+
+    // Tap to start
+    const tapAlpha = 0.45 + pulse * 0.45;
+    ctx.font = `bold 11px 'JetBrains Mono', monospace`;
+    ctx.fillStyle = `rgba(255,77,46,${tapAlpha})`;
+    ctx.fillText('TAP TO START', W / 2, H * 0.72);
+
+    // Accent line
+    ctx.fillStyle = ACC;
+    ctx.fillRect(W / 2 - 24, H * 0.72 + 10, 48, 2);
+
     ctx.textAlign = 'left';
   }
 
