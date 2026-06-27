@@ -4,16 +4,92 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Piyush Nikam — Design Engineer & AI Engineer</title>
+  <meta name="description" content="Design engineer turned AI researcher. 3+ years in automotive electrical systems, pursuing Masters in AI Engineering of Autonomous Systems at THI Ingolstadt.">
+  <meta property="og:title" content="Piyush Nikam — Design Engineer & AI Engineer">
+  <meta property="og:description" content="Design engineer turned AI researcher. 3+ years in automotive electrical systems, pursuing Masters in AI Engineering of Autonomous Systems at THI Ingolstadt.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://piyushnikam.in">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Piyush Nikam — Design Engineer & AI Engineer">
+  <meta name="twitter:description" content="Design engineer turned AI researcher. 3+ years in automotive electrical systems, pursuing Masters in AI Engineering of Autonomous Systems at THI Ingolstadt.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2308090b'/%3E%3Ctext x='16' y='22' font-family='system-ui' font-weight='900' font-size='14' fill='%23ff4d2e' text-anchor='middle'%3EPN%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <script>(function () { var t = localStorage.getItem('portfolio-theme') || (matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark'); document.documentElement.setAttribute('data-theme', t); })();</script>
   <script src="./support.js"></script>
 </head>
 
 <body>
+  <!-- INTRO SCREEN -->
+  <div id="intro-screen" style="position:fixed;inset:0;z-index:998;background:#08090b;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;transition:opacity .55s ease;">
+    <div id="intro-tag" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:rgba(255,77,46,0.8);margin-bottom:16px;opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease;">Design Engineer · Autonomous Systems</div>
+    <div style="overflow:hidden;">
+      <div id="intro-name" style="font-family:'Saira Condensed',sans-serif;font-weight:800;font-size:clamp(44px,7vw,82px);text-transform:uppercase;letter-spacing:-.01em;display:flex;gap:.16em;opacity:0;transform:translateY(70px);transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1);">
+        <span>PIYUSH</span><span style="color:#ff4d2e;">NIKAM</span>
+      </div>
+    </div>
+    <div style="margin-top:28px;width:52px;height:2px;background:rgba(255,77,46,0.25);position:relative;overflow:hidden;">
+      <div id="intro-fill" style="position:absolute;top:0;left:0;height:100%;width:0;background:#ff4d2e;transition:width 1.15s linear;"></div>
+    </div>
+  </div>
+  <script>
+    (function(){
+      var t=localStorage.getItem('portfolio-theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');
+      var s=document.getElementById('intro-screen');
+      if(s&&t==='light')s.style.background='#eeeff2';
+    })();
+  </script>
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cur" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9999;will-change:transform;opacity:0;transition:opacity .3s;filter:drop-shadow(0 0 2px rgba(255,255,255,0.95)) drop-shadow(0 0 4px rgba(0,0,0,0.5));">
+    <div id="cur-a-l" style="position:absolute;top:-1px;right:6px;width:11px;height:2px;background:#ff4d2e;transition:width .15s ease,right .15s ease;"></div>
+    <div id="cur-a-r" style="position:absolute;top:-1px;left:6px;width:11px;height:2px;background:#ff4d2e;transition:width .15s ease,left .15s ease;"></div>
+    <div id="cur-a-t" style="position:absolute;left:-1px;bottom:6px;width:2px;height:11px;background:#ff4d2e;transition:height .15s ease,bottom .15s ease;"></div>
+    <div id="cur-a-b" style="position:absolute;left:-1px;top:6px;width:2px;height:11px;background:#ff4d2e;transition:height .15s ease,top .15s ease;"></div>
+  </div>
+  <style>
+    @media(hover:hover){body,a,button{cursor:none!important;}}
+  </style>
+
   <button id="theme-toggle"
     style="position:fixed; top:20px; right:28px; z-index:56; border-radius:20px; padding:9px 20px; cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:16px; letter-spacing:.05em; display:flex; align-items:center; gap:0; transition:border-color .25s,color .25s;"
     title="Toggle light/dark mode">
     <span id="theme-icon" style="font-size:22px; line-height:1;">☀</span>
   </button>
+  <div id="theme-hint" style="position:fixed; top:62px; right:28px; z-index:57; font-family:'JetBrains Mono',monospace; font-size:11px; background:rgba(255,77,46,0.92); color:#fff; padding:5px 11px; border-radius:8px; white-space:nowrap; pointer-events:none; opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s;">
+    <span id="theme-hint-text">try light mode</span>
+    <span style="position:absolute; top:-5px; right:18px; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:5px solid rgba(255,77,46,0.92);"></span>
+  </div>
+  <style>
+    @media (max-width: 767px) {
+      #theme-hint { right: 14px !important; }
+    }
+  </style>
+  <script>
+    (function () {
+      var hint = document.getElementById('theme-hint');
+      var hintText = document.getElementById('theme-hint-text');
+      if (!hint || !hintText) return;
+      var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      hintText.textContent = currentTheme === 'dark' ? 'try light mode' : 'try dark mode';
+      setTimeout(function () {
+        hint.style.opacity = '1';
+        hint.style.transform = 'translateY(0)';
+        var timer = setTimeout(function () {
+          hint.style.opacity = '0';
+          hint.style.transform = 'translateY(-4px)';
+        }, 3000);
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', function () {
+          clearTimeout(timer);
+          hint.style.opacity = '0';
+          hint.style.transform = 'translateY(-4px)';
+        }, { once: true });
+      }, 1200);
+    })();
+  </script>
   <x-dc>
     <helmet>
       <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -337,6 +413,7 @@
               style="display:inline-flex; align-items:center; gap:10px; padding:13px 24px; background:transparent; color:var(--fg-btn); text-decoration:none; border:1px solid var(--border-btn); font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; border-radius:2px;"
               style-hover="border-color:var(--accent,#ff4d2e); color:var(--accent,#ff4d2e)">GitHub</a>
           </div>
+
         </div>
 
       </div>
@@ -1044,6 +1121,110 @@ class Component extends DCLogic {
       }, 980);
     }
   </script>
+
+  <!-- INTRO SCREEN ANIMATION -->
+  <script>
+    (function () {
+      var screen = document.getElementById('intro-screen');
+      var tag = document.getElementById('intro-tag');
+      var name = document.getElementById('intro-name');
+      var fill = document.getElementById('intro-fill');
+      if (!screen) return;
+
+      document.body.style.overflow = 'hidden';
+
+      function run() {
+        requestAnimationFrame(function () {
+          if (tag) { tag.style.opacity = '1'; tag.style.transform = 'translateY(0)'; }
+          setTimeout(function () {
+            if (name) { name.style.opacity = '1'; name.style.transform = 'translateY(0)'; }
+            if (fill) fill.style.width = '100%';
+          }, 120);
+          setTimeout(function () {
+            screen.style.opacity = '0';
+            document.body.style.overflow = '';
+          }, 1350);
+          setTimeout(function () { screen.remove(); }, 1920);
+        });
+      }
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(run);
+      } else {
+        setTimeout(run, 60);
+      }
+    })();
+  </script>
+
+  <!-- CUSTOM CURSOR -->
+  <script>
+    (function () {
+      if (window.matchMedia('(hover: none)').matches) return;
+      var cur = document.getElementById('cur');
+      var al = document.getElementById('cur-a-l');
+      var ar = document.getElementById('cur-a-r');
+      var at = document.getElementById('cur-a-t');
+      var ab = document.getElementById('cur-a-b');
+      if (!cur) return;
+
+      var ready = false;
+
+      function cssPx(v) {
+        return v / (parseFloat(getComputedStyle(document.documentElement).zoom) || 1);
+      }
+
+      document.addEventListener('mousemove', function (e) {
+        var mx = cssPx(e.clientX), my = cssPx(e.clientY);
+        if (!ready) { ready = true; cur.style.opacity = '1'; }
+        cur.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+      }, { passive: true });
+
+      var W = 11, G = 6; // arm length, gap — single source of truth for resets
+
+      document.addEventListener('mousedown', function () {
+        [al, ar].forEach(function (a) { if (a) a.style.width = '7px'; });
+        [at, ab].forEach(function (a) { if (a) a.style.height = '7px'; });
+      });
+      document.addEventListener('mouseup', function () {
+        [al, ar].forEach(function (a) { if (a) a.style.width = W + 'px'; });
+        [at, ab].forEach(function (a) { if (a) a.style.height = W + 'px'; });
+      });
+
+      function addHover(el) {
+        if (el._curHover) return;
+        el._curHover = true;
+        el.addEventListener('mouseenter', function () {
+          if (al) { al.style.width = '16px'; al.style.right = '8px'; }
+          if (ar) { ar.style.width = '16px'; ar.style.left = '8px'; }
+          if (at) { at.style.height = '16px'; at.style.bottom = '8px'; }
+          if (ab) { ab.style.height = '16px'; ab.style.top = '8px'; }
+        });
+        el.addEventListener('mouseleave', function () {
+          if (al) { al.style.width = W + 'px'; al.style.right = G + 'px'; }
+          if (ar) { ar.style.width = W + 'px'; ar.style.left = G + 'px'; }
+          if (at) { at.style.height = W + 'px'; at.style.bottom = G + 'px'; }
+          if (ab) { ab.style.height = W + 'px'; ab.style.top = G + 'px'; }
+        });
+      }
+
+      window.addEventListener('load', function () {
+        document.querySelectorAll('a, button').forEach(addHover);
+      });
+
+      var obs = new MutationObserver(function (muts) {
+        muts.forEach(function (m) {
+          m.addedNodes.forEach(function (n) {
+            if (n.nodeType === 1) {
+              if (n.matches('a,button')) addHover(n);
+              n.querySelectorAll('a,button').forEach(addHover);
+            }
+          });
+        });
+      });
+      obs.observe(document.body, { childList: true, subtree: true });
+    })();
+  </script>
+
 </body>
 
 </html>
