@@ -90,6 +90,134 @@
       }, 1200);
     })();
   </script>
+
+  <!-- EDUCATION EASTER EGGS: power-grid+transformer (Electrical Engineering) and a neural network (AI Engineering), each injected bottom-right of their education card -->
+  <style>
+    .ee-gen *, .ai-gen * { animation-timing-function: cubic-bezier(.45,.05,.55,.95); }
+
+    @media (max-width: 767px) {
+      .ee-gen, .ai-gen { bottom:8px !important; right:14px !important; width:82px !important; }
+      .ee-gen .ee-gen-grid { width:82px !important; height:28px !important; }
+      .ai-gen .ai-gen-net { width:82px !important; height:28px !important; }
+    }
+  </style>
+  <script>
+    (function () {
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Power-grid + transformer — Electrical Engineering education card
+      function buildGrid() {
+        var wrap = document.createElement('div');
+        wrap.className = 'ee-gen';
+        wrap.setAttribute('aria-hidden', 'true');
+        wrap.style.cssText = 'position:absolute; bottom:14px; right:24px; z-index:2; width:96px; pointer-events:none;';
+        wrap.innerHTML =
+          '<svg class="ee-gen-grid" viewBox="0 0 100 34" width="96" height="33" style="display:block; overflow:visible;">' +
+            '<g stroke="var(--accent,#ff4d2e)" stroke-width="1" fill="none" opacity="0.75">' +
+              '<path d="M5,28 L15,6 L25,28" />' +
+              '<path d="M8,22 L22,22" />' +
+              '<path d="M10,16 L20,16" />' +
+              '<path d="M12,10 L18,10" />' +
+              '<g transform="translate(70,0)">' +
+                '<path d="M5,28 L15,6 L25,28" />' +
+                '<path d="M8,22 L22,22" />' +
+                '<path d="M10,16 L20,16" />' +
+                '<path d="M12,10 L18,10" />' +
+              '</g>' +
+            '</g>' +
+            '<g stroke="var(--accent,#ff4d2e)" fill="none" opacity="0.75">' +
+              '<line x1="50" y1="28" x2="50" y2="19" stroke-width="1" />' +
+              '<rect x="43" y="13" width="14" height="6" rx="1.4" fill="var(--accent,#ff4d2e)" fill-opacity="0.14" stroke-width="1" />' +
+              '<line x1="43.5" y1="15.3" x2="56.5" y2="15.3" stroke-width="0.6" opacity="0.6" />' +
+              '<line x1="43.5" y1="16.7" x2="56.5" y2="16.7" stroke-width="0.6" opacity="0.6" />' +
+              '<line x1="47" y1="13" x2="47" y2="7" stroke-width="1" />' +
+              '<line x1="53" y1="13" x2="53" y2="7" stroke-width="1" />' +
+              '<ellipse cx="47" cy="10.5" rx="1.6" ry="0.7" stroke-width="0.8" />' +
+              '<ellipse cx="47" cy="8.5" rx="1.6" ry="0.7" stroke-width="0.8" />' +
+              '<ellipse cx="53" cy="10.5" rx="1.6" ry="0.7" stroke-width="0.8" />' +
+              '<ellipse cx="53" cy="8.5" rx="1.6" ry="0.7" stroke-width="0.8" />' +
+            '</g>' +
+            '<path d="M15,6 Q31,12 47,6.5" stroke="var(--accent,#ff4d2e)" stroke-width="1" fill="none" opacity="0.5" />' +
+            '<path d="M53,6.5 Q69,12 85,6" stroke="var(--accent,#ff4d2e)" stroke-width="1" fill="none" opacity="0.5" />' +
+            '<circle cx="15" cy="6" r="1.6" fill="var(--accent,#ff4d2e)"><animate attributeName="opacity" values="1;0.25;1" dur="1.4s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="85" cy="6" r="1.6" fill="var(--accent,#ff4d2e)"><animate attributeName="opacity" values="0.25;1;0.25" dur="1.4s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="47" cy="6.5" r="1.2" fill="var(--accent,#ff4d2e)"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.3s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="53" cy="6.5" r="1.2" fill="var(--accent,#ff4d2e)"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" begin="0.3s" repeatCount="indefinite" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#ff4d2e)"><animateMotion dur="1.6s" repeatCount="indefinite" path="M15,6 Q31,12 47,6.5" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#ff4d2e)" opacity="0.6"><animateMotion dur="1.6s" begin="0.8s" repeatCount="indefinite" path="M15,6 Q31,12 47,6.5" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#ff4d2e)"><animateMotion dur="1.6s" begin="0.4s" repeatCount="indefinite" path="M53,6.5 Q69,12 85,6" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#ff4d2e)" opacity="0.6"><animateMotion dur="1.6s" begin="1.2s" repeatCount="indefinite" path="M53,6.5 Q69,12 85,6" /></circle>' +
+          '</svg>';
+        return wrap;
+      }
+
+      // Neural network — AI Engineering of Autonomous Systems education card
+      function buildAi() {
+        var wrap = document.createElement('div');
+        wrap.className = 'ai-gen';
+        wrap.setAttribute('aria-hidden', 'true');
+        wrap.style.cssText = 'position:absolute; bottom:14px; right:24px; z-index:2; width:96px; pointer-events:none;';
+        wrap.innerHTML =
+          '<svg class="ai-gen-net" viewBox="0 0 100 34" width="96" height="33" style="display:block; overflow:visible;">' +
+            '<g stroke="var(--accent,#ff4d2e)" stroke-width="0.7" opacity="0.35">' +
+              '<line x1="14" y1="5" x2="50" y2="3" />' +
+              '<line x1="14" y1="5" x2="50" y2="10" />' +
+              '<line x1="14" y1="13" x2="50" y2="10" />' +
+              '<line x1="14" y1="13" x2="50" y2="17" />' +
+              '<line x1="14" y1="21" x2="50" y2="17" />' +
+              '<line x1="14" y1="21" x2="50" y2="24" />' +
+              '<line x1="14" y1="29" x2="50" y2="24" />' +
+              '<line x1="14" y1="29" x2="50" y2="31" />' +
+              '<line x1="50" y1="3" x2="86" y2="12" />' +
+              '<line x1="50" y1="3" x2="86" y2="22" />' +
+              '<line x1="50" y1="10" x2="86" y2="12" />' +
+              '<line x1="50" y1="10" x2="86" y2="22" />' +
+              '<line x1="50" y1="17" x2="86" y2="12" />' +
+              '<line x1="50" y1="17" x2="86" y2="22" />' +
+              '<line x1="50" y1="24" x2="86" y2="12" />' +
+              '<line x1="50" y1="24" x2="86" y2="22" />' +
+              '<line x1="50" y1="31" x2="86" y2="12" />' +
+              '<line x1="50" y1="31" x2="86" y2="22" />' +
+            '</g>' +
+            '<circle cx="14" cy="5" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="14" cy="13" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.08s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="14" cy="21" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.16s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="14" cy="29" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.24s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="50" cy="3" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.35s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="50" cy="10" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.43s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="50" cy="17" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.51s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="50" cy="24" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.59s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="50" cy="31" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.67s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="86" cy="12" r="2.3" fill="var(--accent,#ff4d2e)" fill-opacity="0.24" stroke="var(--accent,#ff4d2e)" stroke-width="1.1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.8s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="86" cy="22" r="2.3" fill="var(--accent,#ff4d2e)" fill-opacity="0.24" stroke="var(--accent,#ff4d2e)" stroke-width="1.1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.88s" repeatCount="indefinite" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#ff4d2e)"><animateMotion dur="1.8s" repeatCount="indefinite" path="M14,5 L50,3 L86,12" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#ff4d2e)" opacity="0.75"><animateMotion dur="1.8s" begin="0.45s" repeatCount="indefinite" path="M14,13 L50,17 L86,12" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#ff4d2e)" opacity="0.6"><animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite" path="M14,21 L50,17 L86,22" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#ff4d2e)" opacity="0.45"><animateMotion dur="1.8s" begin="1.35s" repeatCount="indefinite" path="M14,29 L50,31 L86,22" /></circle>' +
+          '</svg>';
+        return wrap;
+      }
+
+      function inject(fieldValue, wrapClass, builder) {
+        var target = document.querySelector('[data-edu-field="' + fieldValue + '"]');
+        if (!target || target.querySelector('.' + wrapClass)) return;
+        var el = builder();
+        target.appendChild(el);
+        if (reduced) {
+          var svg = el.querySelector('svg');
+          if (svg && svg.pauseAnimations) svg.pauseAnimations();
+        }
+      }
+
+      function injectAll() {
+        inject('Electrical Engineering', 'ee-gen', buildGrid);
+        inject('AI Engineering of Autonomous Systems', 'ai-gen', buildAi);
+      }
+
+      window.addEventListener('load', function () { setTimeout(injectAll, 500); });
+    })();
+  </script>
+
   <x-dc>
     <helmet>
       <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -483,8 +611,8 @@
       </div>
       <div data-edu-grid style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
         <sc-for list="{{ education }}" as="e" hint-placeholder-count="2">
-          <div data-panel
-            style="will-change:transform,opacity; transform-origin:center; background:linear-gradient(180deg, var(--card-from), var(--card-to)); border:1px solid var(--border-card); border-radius:4px; padding:30px 32px;">
+          <div data-panel data-edu-field="{{ e.field }}"
+            style="will-change:transform,opacity; transform-origin:center; background:linear-gradient(180deg, var(--card-from), var(--card-to)); border:1px solid var(--border-card); border-radius:4px; padding:30px 32px; position:relative; overflow:hidden;">
             <div
               style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--accent,#ff4d2e); margin-bottom:14px;">
               {{ e.date }}</div>
@@ -694,10 +822,19 @@
         var grid = document.querySelector('[data-proj-grid]');
         if (!grid) return;
         grid.querySelectorAll('[data-gh-card]').forEach(function (el) { el.remove(); });
-        var base = grid.querySelectorAll('[data-panel]').length;
+
+        // GitHub projects lead the grid; the manually curated ones follow
+        var frag = document.createDocumentFragment();
         repos.forEach(function (r, i) {
-          var n = String(base + i + 1).padStart(2, '0');
-          grid.appendChild(makeCard(n, toTitle(r.name), r.language, fmtDate(r.created_at), r.description, r.html_url));
+          var n = String(i + 1).padStart(2, '0');
+          frag.appendChild(makeCard(n, toTitle(r.name), r.language, fmtDate(r.created_at), r.description, r.html_url));
+        });
+        grid.insertBefore(frag, grid.firstChild);
+
+        // Renumber every card in DOM order so the sequence stays continuous
+        grid.querySelectorAll('[data-panel]').forEach(function (card, i) {
+          var numEl = card.querySelector('span');
+          if (numEl) numEl.textContent = String(i + 1).padStart(2, '0');
         });
       }
 
