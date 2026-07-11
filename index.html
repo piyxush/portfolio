@@ -13,25 +13,26 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Piyush Nikam — Design Engineer & AI Engineer">
   <meta name="twitter:description" content="Design engineer turned AI researcher. 3+ years in automotive electrical systems, pursuing Masters in AI Engineering of Autonomous Systems at THI Ingolstadt.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2308090b'/%3E%3Ctext x='16' y='22' font-family='system-ui' font-weight='900' font-size='14' fill='%23ff4d2e' text-anchor='middle'%3EPN%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2308090b'/%3E%3Ctext x='16' y='22' font-family='system-ui' font-weight='900' font-size='14' fill='%2338bdf8' text-anchor='middle'%3EPN%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <script>(function () { var t = localStorage.getItem('portfolio-theme') || (matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark'); document.documentElement.setAttribute('data-theme', t); })();</script>
   <script src="./support.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
 </head>
 
 <body>
   <!-- INTRO SCREEN -->
   <div id="intro-screen" style="position:fixed;inset:0;z-index:998;background:#08090b;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;transition:opacity .55s ease;">
-    <div id="intro-tag" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:rgba(255,77,46,0.8);margin-bottom:16px;opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease;">Design Engineer · Autonomous Systems</div>
+    <div id="intro-tag" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:rgba(56,189,248,0.8);margin-bottom:16px;opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease;">Design Engineer · Autonomous Systems</div>
     <div style="overflow:hidden;">
       <div id="intro-name" style="font-family:'Saira Condensed',sans-serif;font-weight:800;font-size:clamp(44px,7vw,82px);text-transform:uppercase;letter-spacing:-.01em;display:flex;gap:.16em;opacity:0;transform:translateY(70px);transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1);">
-        <span>PIYUSH</span><span style="color:#ff4d2e;">NIKAM</span>
+        <span>PIYUSH</span><span style="color:#38bdf8;">NIKAM</span>
       </div>
     </div>
-    <div style="margin-top:28px;width:52px;height:2px;background:rgba(255,77,46,0.25);position:relative;overflow:hidden;">
-      <div id="intro-fill" style="position:absolute;top:0;left:0;height:100%;width:0;background:#ff4d2e;transition:width 1.15s linear;"></div>
+    <div style="margin-top:28px;width:52px;height:2px;background:rgba(56,189,248,0.25);position:relative;overflow:hidden;">
+      <div id="intro-fill" style="position:absolute;top:0;left:0;height:100%;width:0;background:#38bdf8;transition:width 1.15s linear;"></div>
     </div>
   </div>
   <script>
@@ -44,10 +45,10 @@
 
   <!-- CUSTOM CURSOR -->
   <div id="cur" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9999;will-change:transform;opacity:0;transition:opacity .3s;filter:drop-shadow(0 0 2px rgba(255,255,255,0.95)) drop-shadow(0 0 4px rgba(0,0,0,0.5));">
-    <div id="cur-a-l" style="position:absolute;top:-1px;right:6px;width:11px;height:2px;background:#ff4d2e;transition:width .15s ease,right .15s ease;"></div>
-    <div id="cur-a-r" style="position:absolute;top:-1px;left:6px;width:11px;height:2px;background:#ff4d2e;transition:width .15s ease,left .15s ease;"></div>
-    <div id="cur-a-t" style="position:absolute;left:-1px;bottom:6px;width:2px;height:11px;background:#ff4d2e;transition:height .15s ease,bottom .15s ease;"></div>
-    <div id="cur-a-b" style="position:absolute;left:-1px;top:6px;width:2px;height:11px;background:#ff4d2e;transition:height .15s ease,top .15s ease;"></div>
+    <div id="cur-a-l" style="position:absolute;top:-1px;right:6px;width:11px;height:2px;background:#38bdf8;transition:width .15s ease,right .15s ease;"></div>
+    <div id="cur-a-r" style="position:absolute;top:-1px;left:6px;width:11px;height:2px;background:#38bdf8;transition:width .15s ease,left .15s ease;"></div>
+    <div id="cur-a-t" style="position:absolute;left:-1px;bottom:6px;width:2px;height:11px;background:#38bdf8;transition:height .15s ease,bottom .15s ease;"></div>
+    <div id="cur-a-b" style="position:absolute;left:-1px;top:6px;width:2px;height:11px;background:#38bdf8;transition:height .15s ease,top .15s ease;"></div>
   </div>
   <style>
     @media(hover:hover){body,a,button{cursor:none!important;}}
@@ -58,9 +59,9 @@
     title="Toggle light/dark mode">
     <span id="theme-icon" style="font-size:22px; line-height:1;">☀</span>
   </button>
-  <div id="theme-hint" style="position:fixed; top:62px; right:28px; z-index:57; font-family:'JetBrains Mono',monospace; font-size:11px; background:rgba(255,77,46,0.92); color:#fff; padding:5px 11px; border-radius:8px; white-space:nowrap; pointer-events:none; opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s;">
+  <div id="theme-hint" style="position:fixed; top:62px; right:28px; z-index:57; font-family:'JetBrains Mono',monospace; font-size:11px; background:rgba(56,189,248,0.92); color:#fff; padding:5px 11px; border-radius:8px; white-space:nowrap; pointer-events:none; opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s;">
     <span id="theme-hint-text">try light mode</span>
-    <span style="position:absolute; top:-5px; right:18px; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:5px solid rgba(255,77,46,0.92);"></span>
+    <span style="position:absolute; top:-5px; right:18px; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:5px solid rgba(56,189,248,0.92);"></span>
   </div>
   <style>
     @media (max-width: 767px) {
@@ -113,7 +114,7 @@
         wrap.style.cssText = 'position:absolute; bottom:14px; right:24px; z-index:2; width:96px; pointer-events:none;';
         wrap.innerHTML =
           '<svg class="ee-gen-grid" viewBox="0 0 100 34" width="96" height="33" style="display:block; overflow:visible;">' +
-            '<g stroke="var(--accent,#ff4d2e)" stroke-width="1" fill="none" opacity="0.75">' +
+            '<g stroke="var(--accent,#38bdf8)" stroke-width="1" fill="none" opacity="0.75">' +
               '<path d="M5,28 L15,6 L25,28" />' +
               '<path d="M8,22 L22,22" />' +
               '<path d="M10,16 L20,16" />' +
@@ -125,9 +126,9 @@
                 '<path d="M12,10 L18,10" />' +
               '</g>' +
             '</g>' +
-            '<g stroke="var(--accent,#ff4d2e)" fill="none" opacity="0.75">' +
+            '<g stroke="var(--accent,#38bdf8)" fill="none" opacity="0.75">' +
               '<line x1="50" y1="28" x2="50" y2="19" stroke-width="1" />' +
-              '<rect x="43" y="13" width="14" height="6" rx="1.4" fill="var(--accent,#ff4d2e)" fill-opacity="0.14" stroke-width="1" />' +
+              '<rect x="43" y="13" width="14" height="6" rx="1.4" fill="var(--accent,#38bdf8)" fill-opacity="0.14" stroke-width="1" />' +
               '<line x1="43.5" y1="15.3" x2="56.5" y2="15.3" stroke-width="0.6" opacity="0.6" />' +
               '<line x1="43.5" y1="16.7" x2="56.5" y2="16.7" stroke-width="0.6" opacity="0.6" />' +
               '<line x1="47" y1="13" x2="47" y2="7" stroke-width="1" />' +
@@ -137,16 +138,16 @@
               '<ellipse cx="53" cy="10.5" rx="1.6" ry="0.7" stroke-width="0.8" />' +
               '<ellipse cx="53" cy="8.5" rx="1.6" ry="0.7" stroke-width="0.8" />' +
             '</g>' +
-            '<path d="M15,6 Q31,12 47,6.5" stroke="var(--accent,#ff4d2e)" stroke-width="1" fill="none" opacity="0.5" />' +
-            '<path d="M53,6.5 Q69,12 85,6" stroke="var(--accent,#ff4d2e)" stroke-width="1" fill="none" opacity="0.5" />' +
-            '<circle cx="15" cy="6" r="1.6" fill="var(--accent,#ff4d2e)"><animate attributeName="opacity" values="1;0.25;1" dur="1.4s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="85" cy="6" r="1.6" fill="var(--accent,#ff4d2e)"><animate attributeName="opacity" values="0.25;1;0.25" dur="1.4s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="47" cy="6.5" r="1.2" fill="var(--accent,#ff4d2e)"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.3s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="53" cy="6.5" r="1.2" fill="var(--accent,#ff4d2e)"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" begin="0.3s" repeatCount="indefinite" /></circle>' +
-            '<circle r="1.3" fill="var(--accent,#ff4d2e)"><animateMotion dur="1.6s" repeatCount="indefinite" path="M15,6 Q31,12 47,6.5" /></circle>' +
-            '<circle r="1.3" fill="var(--accent,#ff4d2e)" opacity="0.6"><animateMotion dur="1.6s" begin="0.8s" repeatCount="indefinite" path="M15,6 Q31,12 47,6.5" /></circle>' +
-            '<circle r="1.3" fill="var(--accent,#ff4d2e)"><animateMotion dur="1.6s" begin="0.4s" repeatCount="indefinite" path="M53,6.5 Q69,12 85,6" /></circle>' +
-            '<circle r="1.3" fill="var(--accent,#ff4d2e)" opacity="0.6"><animateMotion dur="1.6s" begin="1.2s" repeatCount="indefinite" path="M53,6.5 Q69,12 85,6" /></circle>' +
+            '<path d="M15,6 Q31,12 47,6.5" stroke="var(--accent,#38bdf8)" stroke-width="1" fill="none" opacity="0.5" />' +
+            '<path d="M53,6.5 Q69,12 85,6" stroke="var(--accent,#38bdf8)" stroke-width="1" fill="none" opacity="0.5" />' +
+            '<circle cx="15" cy="6" r="1.6" fill="var(--accent,#38bdf8)"><animate attributeName="opacity" values="1;0.25;1" dur="1.4s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="85" cy="6" r="1.6" fill="var(--accent,#38bdf8)"><animate attributeName="opacity" values="0.25;1;0.25" dur="1.4s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="47" cy="6.5" r="1.2" fill="var(--accent,#38bdf8)"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.3s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="53" cy="6.5" r="1.2" fill="var(--accent,#38bdf8)"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" begin="0.3s" repeatCount="indefinite" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#38bdf8)"><animateMotion dur="1.6s" repeatCount="indefinite" path="M15,6 Q31,12 47,6.5" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#38bdf8)" opacity="0.6"><animateMotion dur="1.6s" begin="0.8s" repeatCount="indefinite" path="M15,6 Q31,12 47,6.5" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#38bdf8)"><animateMotion dur="1.6s" begin="0.4s" repeatCount="indefinite" path="M53,6.5 Q69,12 85,6" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#38bdf8)" opacity="0.6"><animateMotion dur="1.6s" begin="1.2s" repeatCount="indefinite" path="M53,6.5 Q69,12 85,6" /></circle>' +
           '</svg>';
         return wrap;
       }
@@ -159,7 +160,7 @@
         wrap.style.cssText = 'position:absolute; bottom:14px; right:24px; z-index:2; width:96px; pointer-events:none;';
         wrap.innerHTML =
           '<svg class="ai-gen-net" viewBox="0 0 100 34" width="96" height="33" style="display:block; overflow:visible;">' +
-            '<g stroke="var(--accent,#ff4d2e)" stroke-width="0.7" opacity="0.35">' +
+            '<g stroke="var(--accent,#38bdf8)" stroke-width="0.7" opacity="0.35">' +
               '<line x1="14" y1="5" x2="50" y2="3" />' +
               '<line x1="14" y1="5" x2="50" y2="10" />' +
               '<line x1="14" y1="13" x2="50" y2="10" />' +
@@ -179,21 +180,21 @@
               '<line x1="50" y1="31" x2="86" y2="12" />' +
               '<line x1="50" y1="31" x2="86" y2="22" />' +
             '</g>' +
-            '<circle cx="14" cy="5" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="14" cy="13" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.08s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="14" cy="21" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.16s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="14" cy="29" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.24s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="50" cy="3" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.35s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="50" cy="10" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.43s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="50" cy="17" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.51s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="50" cy="24" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.59s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="50" cy="31" r="2" fill="var(--accent,#ff4d2e)" fill-opacity="0.22" stroke="var(--accent,#ff4d2e)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.67s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="86" cy="12" r="2.3" fill="var(--accent,#ff4d2e)" fill-opacity="0.24" stroke="var(--accent,#ff4d2e)" stroke-width="1.1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.8s" repeatCount="indefinite" /></circle>' +
-            '<circle cx="86" cy="22" r="2.3" fill="var(--accent,#ff4d2e)" fill-opacity="0.24" stroke="var(--accent,#ff4d2e)" stroke-width="1.1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.88s" repeatCount="indefinite" /></circle>' +
-            '<circle r="1.3" fill="var(--accent,#ff4d2e)"><animateMotion dur="1.8s" repeatCount="indefinite" path="M14,5 L50,3 L86,12" /></circle>' +
-            '<circle r="1.3" fill="var(--accent,#ff4d2e)" opacity="0.75"><animateMotion dur="1.8s" begin="0.45s" repeatCount="indefinite" path="M14,13 L50,17 L86,12" /></circle>' +
-            '<circle r="1.3" fill="var(--accent,#ff4d2e)" opacity="0.6"><animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite" path="M14,21 L50,17 L86,22" /></circle>' +
-            '<circle r="1.3" fill="var(--accent,#ff4d2e)" opacity="0.45"><animateMotion dur="1.8s" begin="1.35s" repeatCount="indefinite" path="M14,29 L50,31 L86,22" /></circle>' +
+            '<circle cx="14" cy="5" r="2" fill="var(--accent,#38bdf8)" fill-opacity="0.22" stroke="var(--accent,#38bdf8)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="14" cy="13" r="2" fill="var(--accent,#38bdf8)" fill-opacity="0.22" stroke="var(--accent,#38bdf8)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.08s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="14" cy="21" r="2" fill="var(--accent,#38bdf8)" fill-opacity="0.22" stroke="var(--accent,#38bdf8)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.16s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="14" cy="29" r="2" fill="var(--accent,#38bdf8)" fill-opacity="0.22" stroke="var(--accent,#38bdf8)" stroke-width="1"><animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="0.24s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="50" cy="3" r="2" fill="var(--accent,#38bdf8)" fill-opacity="0.22" stroke="var(--accent,#38bdf8)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.35s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="50" cy="10" r="2" fill="var(--accent,#38bdf8)" fill-opacity="0.22" stroke="var(--accent,#38bdf8)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.43s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="50" cy="17" r="2" fill="var(--accent,#38bdf8)" fill-opacity="0.22" stroke="var(--accent,#38bdf8)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.51s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="50" cy="24" r="2" fill="var(--accent,#38bdf8)" fill-opacity="0.22" stroke="var(--accent,#38bdf8)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.59s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="50" cy="31" r="2" fill="var(--accent,#38bdf8)" fill-opacity="0.22" stroke="var(--accent,#38bdf8)" stroke-width="1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.67s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="86" cy="12" r="2.3" fill="var(--accent,#38bdf8)" fill-opacity="0.24" stroke="var(--accent,#38bdf8)" stroke-width="1.1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.8s" repeatCount="indefinite" /></circle>' +
+            '<circle cx="86" cy="22" r="2.3" fill="var(--accent,#38bdf8)" fill-opacity="0.24" stroke="var(--accent,#38bdf8)" stroke-width="1.1"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.88s" repeatCount="indefinite" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#38bdf8)"><animateMotion dur="1.8s" repeatCount="indefinite" path="M14,5 L50,3 L86,12" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#38bdf8)" opacity="0.75"><animateMotion dur="1.8s" begin="0.45s" repeatCount="indefinite" path="M14,13 L50,17 L86,12" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#38bdf8)" opacity="0.6"><animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite" path="M14,21 L50,17 L86,22" /></circle>' +
+            '<circle r="1.3" fill="var(--accent,#38bdf8)" opacity="0.45"><animateMotion dur="1.8s" begin="1.35s" repeatCount="indefinite" path="M14,29 L50,31 L86,22" /></circle>' +
           '</svg>';
         return wrap;
       }
@@ -300,7 +301,7 @@
         }
 
         ::selection {
-          background: var(--accent, #ff4d2e);
+          background: var(--accent, #38bdf8);
           color: var(--bg);
         }
 
@@ -352,8 +353,8 @@
         }
 
         @keyframes playpulse {
-          0%, 100% { box-shadow: 0 0 18px rgba(255,77,46,0.42); }
-          50% { box-shadow: 0 0 36px rgba(255,77,46,0.82); }
+          0%, 100% { box-shadow: 0 0 18px rgba(56,189,248,0.42); }
+          50% { box-shadow: 0 0 36px rgba(56,189,248,0.82); }
         }
 
         #play-btn {
@@ -364,7 +365,7 @@
         #play-btn:hover {
           transform: translate(-50%,-50%) scale(1.1) !important;
           animation: none;
-          box-shadow: 0 0 44px rgba(255,77,46,0.95) !important;
+          box-shadow: 0 0 44px rgba(56,189,248,0.95) !important;
         }
 
         @media (max-width: 767px) {
@@ -386,7 +387,7 @@
           cursor: pointer; transition: color .2s, border-color .2s, background .2s;
         }
         #game-ap-btn.ap-active {
-          background: #ff4d2e; color: #fff; border-color: #ff4d2e;
+          background: #38bdf8; color: #fff; border-color: #38bdf8;
         }
 
         #theme-toggle {
@@ -402,13 +403,8 @@
         }
 
         #theme-toggle:hover {
-          border-color: var(--accent, #ff4d2e);
-          color: var(--accent, #ff4d2e);
-        }
-
-        html[data-theme="light"] #spotlight {
-          mix-blend-mode: multiply;
-          opacity: 0.55;
+          border-color: var(--accent, #38bdf8);
+          color: var(--accent, #38bdf8);
         }
 
         /* ── Desktop 150 % zoom ─────────────────────────────────────── */
@@ -420,6 +416,10 @@
 
         /* ── Mobile layout ──────────────────────────────────────────── */
         @media (max-width: 767px) {
+          spline-viewer {
+            display: none !important;
+          }
+
           #main-nav {
             display: none !important;
           }
@@ -478,22 +478,23 @@
 
     <div style="position:fixed; inset:0; z-index:-4; background:var(--bg);"></div>
     <canvas data-three style="position:fixed; inset:0; width:100%; height:100%; z-index:-3; display:block;"></canvas>
+    <!-- Spline robot: head-tracks the cursor via the interaction authored in the scene itself.
+         events-target="global" is required because the canvas sits behind all page content
+         (z-index -3), so the viewer must listen on window instead of waiting for the mouse
+         to be directly over the (mostly covered) canvas. -->
+    <spline-viewer url="https://prod.spline.design/Mbl6eKaN5cPJizf7/scene.splinecode"
+      events-target="global"
+      style="position:fixed; inset:0; width:100%; height:100%; z-index:-3;"></spline-viewer>
     <div
       style="position:fixed; inset:0; z-index:-2; pointer-events:none; background:linear-gradient(180deg, var(--overlay-a) 0%, var(--overlay-b) 50%, var(--overlay-c) 100%);">
     </div>
-    <div id="spotlight"
-      style="position:fixed; inset:0; z-index:-1; pointer-events:none; mix-blend-mode:screen; background:
-  radial-gradient(300px circle at var(--mx,50%) var(--my,40%), color-mix(in srgb, var(--accent,#ff4d2e) 24%, transparent), transparent 70%),
-  radial-gradient(780px circle at var(--mx,50%) var(--my,40%), color-mix(in srgb, var(--accent,#ff4d2e) 11%, transparent), transparent 66%);">
-    </div>
-
     <div data-progress
-      style="position:fixed; top:0; left:0; height:3px; width:100%; transform:scaleX(0); transform-origin:0 50%; background:var(--accent,#ff4d2e); z-index:60; box-shadow:0 0 14px var(--accent,#ff4d2e);">
+      style="position:fixed; top:0; left:0; height:3px; width:100%; transform:scaleX(0); transform-origin:0 50%; background:var(--accent,#38bdf8); z-index:60; box-shadow:0 0 14px var(--accent,#38bdf8);">
     </div>
 
     <div id="site-label"
       style="position:fixed; top:26px; left:30px; z-index:55; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--fg-subtle);">
-      <span style="color:var(--accent,#ff4d2e);">●</span>&nbsp; P. NIKAM / ENGINEER
+      <span style="color:var(--accent,#38bdf8);">●</span>&nbsp; P. NIKAM / ENGINEER
     </div>
 
     <nav id="main-nav"
@@ -505,7 +506,7 @@
             style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--fg-dim);">{{
             s.label }}</span>
           <span data-nav-dot
-            style="width:8px; height:8px; border-radius:50%; background:var(--accent,#ff4d2e); flex:none; transition:transform .35s ease; transform:scale(.55);"></span>
+            style="width:8px; height:8px; border-radius:50%; background:var(--accent,#38bdf8); flex:none; transition:transform .35s ease; transform:scale(.55);"></span>
         </div>
       </sc-for>
     </nav>
@@ -516,13 +517,13 @@
       <div style="width:100%; max-width:1180px; margin:0 auto;">
         <div>
           <div
-            style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.34em; text-transform:uppercase; color:var(--accent,#ff4d2e); margin-bottom:22px; display:flex; align-items:center; gap:12px;">
-            <span style="width:38px; height:1px; background:var(--accent,#ff4d2e); display:inline-block;"></span>
+            style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.34em; text-transform:uppercase; color:var(--accent,#38bdf8); margin-bottom:22px; display:flex; align-items:center; gap:12px;">
+            <span style="width:38px; height:1px; background:var(--accent,#38bdf8); display:inline-block;"></span>
             Design Engineer · Autonomous Systems
           </div>
           <h1 data-hero-title
             style="font-family:'Saira Condensed',sans-serif; font-weight:800; font-size:clamp(58px,9vw,138px); line-height:.88; letter-spacing:-.01em; margin:0; text-transform:uppercase;">
-            Piyush<br><span style="color:var(--accent,#ff4d2e);">Nikam</span>
+            Piyush<br><span style="color:var(--accent,#38bdf8);">Nikam</span>
           </h1>
           <p
             style="max-width:520px; margin:30px 0 0; font-size:17px; line-height:1.65; color:var(--fg-muted); font-weight:300;">
@@ -532,14 +533,14 @@
           </p>
           <div style="display:flex; flex-wrap:wrap; gap:14px; margin-top:36px;">
             <a href="mailto:piyush.nikam@gmail.com"
-              style="display:inline-flex; align-items:center; gap:10px; padding:13px 24px; background:var(--accent,#ff4d2e); color:#08090b; text-decoration:none; font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; border-radius:2px;"
+              style="display:inline-flex; align-items:center; gap:10px; padding:13px 24px; background:var(--accent,#38bdf8); color:#08090b; text-decoration:none; font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; border-radius:2px;"
               style-hover="filter:brightness(1.12)">Get in touch</a>
             <a href="https://linkedin.com/in/piyush-nikam" target="_blank" rel="noopener noreferrer"
               style="display:inline-flex; align-items:center; gap:10px; padding:13px 24px; background:transparent; color:var(--fg-btn); text-decoration:none; border:1px solid var(--border-btn); font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; border-radius:2px;"
-              style-hover="border-color:var(--accent,#ff4d2e); color:var(--accent,#ff4d2e)">LinkedIn</a>
+              style-hover="border-color:var(--accent,#38bdf8); color:var(--accent,#38bdf8)">LinkedIn</a>
             <a href="https://github.com/piyxush" target="_blank" rel="noopener noreferrer"
               style="display:inline-flex; align-items:center; gap:10px; padding:13px 24px; background:transparent; color:var(--fg-btn); text-decoration:none; border:1px solid var(--border-btn); font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; border-radius:2px;"
-              style-hover="border-color:var(--accent,#ff4d2e); color:var(--accent,#ff4d2e)">GitHub</a>
+              style-hover="border-color:var(--accent,#38bdf8); color:var(--accent,#38bdf8)">GitHub</a>
           </div>
 
         </div>
@@ -547,7 +548,7 @@
       </div>
 
       <button id="play-btn" onClick="{{ playGame }}"
-        style="position:absolute; left:75%; top:38%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; width:96px; height:96px; background:var(--accent,#ff4d2e); color:#fff; border:none; border-radius:50%; cursor:pointer; font-family:'JetBrains Mono',monospace; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:0; z-index:10;">
+        style="position:absolute; left:75%; top:38%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; width:96px; height:96px; background:var(--accent,#38bdf8); color:#fff; border:none; border-radius:50%; cursor:pointer; font-family:'JetBrains Mono',monospace; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:0; z-index:10;">
         <span class="play-icon" style="font-size:26px; line-height:1; pointer-events:none;">▶</span>
         <span class="play-text" style="font-size:9px; pointer-events:none;">PLAY</span>
         <span class="play-text" style="font-size:9px; pointer-events:none;">GAME</span>
@@ -557,7 +558,7 @@
         style="position:absolute; bottom:34px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:var(--fg-footer); display:flex; flex-direction:column; align-items:center; gap:8px; animation:floaty 2.6s ease-in-out infinite;">
         Scroll
         <span
-          style="width:1px; height:30px; background:linear-gradient(to bottom,var(--accent,#ff4d2e),transparent);"></span>
+          style="width:1px; height:30px; background:linear-gradient(to bottom,var(--accent,#38bdf8),transparent);"></span>
       </div>
     </section>
 
@@ -565,7 +566,7 @@
     <section id="experience" data-section style="padding:90px 8vw; max-width:1180px; margin:0 auto;">
       <div data-panel style="will-change:transform,opacity; transform-origin:center;">
         <div
-          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:8px;">
+          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#38bdf8); margin-bottom:8px;">
           // 02 — EXPERIENCE</div>
         <h2
           style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(40px,5vw,72px); line-height:.95; margin:0 0 50px; text-transform:uppercase; letter-spacing:-.01em;">
@@ -573,20 +574,20 @@
       </div>
       <sc-for list="{{ experiences }}" as="x" hint-placeholder-count="2">
         <div data-panel data-exp-card
-          style="will-change:transform,opacity; transform-origin:center; background:linear-gradient(180deg, var(--card-from), var(--card-to)); border:1px solid var(--border-card); border-left:2px solid var(--accent,#ff4d2e); border-radius:4px; padding:32px 34px; margin-bottom:24px; display:grid; grid-template-columns:1fr auto; gap:28px;">
+          style="will-change:transform,opacity; transform-origin:center; background:linear-gradient(180deg, var(--card-from), var(--card-to)); border:1px solid var(--border-card); border-left:2px solid var(--accent,#38bdf8); border-radius:4px; padding:32px 34px; margin-bottom:24px; display:grid; grid-template-columns:1fr auto; gap:28px;">
           <div>
             <h3
               style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:28px; margin:0; letter-spacing:.01em;">
               {{ x.role }}</h3>
             <div
-              style="color:var(--accent,#ff4d2e); font-weight:600; font-size:15px; margin:4px 0 18px; font-family:'JetBrains Mono',monospace; letter-spacing:.04em;">
+              style="color:var(--accent,#38bdf8); font-weight:600; font-size:15px; margin:4px 0 18px; font-family:'JetBrains Mono',monospace; letter-spacing:.04em;">
               {{ x.org }}</div>
             <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px;">
               <sc-for list="{{ x.bullets }}" as="b" hint-placeholder-count="4">
                 <li
                   style="position:relative; padding-left:22px; font-size:15px; line-height:1.55; color:var(--fg-bullets); font-weight:300;">
                   <span
-                    style="position:absolute; left:0; top:9px; width:7px; height:7px; background:var(--accent,#ff4d2e); transform:rotate(45deg);"></span>{{
+                    style="position:absolute; left:0; top:9px; width:7px; height:7px; background:var(--accent,#38bdf8); transform:rotate(45deg);"></span>{{
                   b }}
                 </li>
               </sc-for>
@@ -603,7 +604,7 @@
     <section id="education" data-section style="padding:90px 8vw; max-width:1180px; margin:0 auto;">
       <div data-panel style="will-change:transform,opacity; transform-origin:center;">
         <div
-          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:8px;">
+          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#38bdf8); margin-bottom:8px;">
           // 03 — EDUCATION</div>
         <h2
           style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(40px,5vw,72px); line-height:.95; margin:0 0 50px; text-transform:uppercase; letter-spacing:-.01em;">
@@ -614,7 +615,7 @@
           <div data-panel data-edu-field="{{ e.field }}"
             style="will-change:transform,opacity; transform-origin:center; background:linear-gradient(180deg, var(--card-from), var(--card-to)); border:1px solid var(--border-card); border-radius:4px; padding:30px 32px; position:relative; overflow:hidden;">
             <div
-              style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--accent,#ff4d2e); margin-bottom:14px;">
+              style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--accent,#38bdf8); margin-bottom:14px;">
               {{ e.date }}</div>
             <h3
               style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:25px; line-height:1.05; margin:0 0 10px;">
@@ -632,7 +633,7 @@
     <section id="skills" data-section style="padding:90px 8vw; max-width:1180px; margin:0 auto;">
       <div data-panel style="will-change:transform,opacity; transform-origin:center;">
         <div
-          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:8px;">
+          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#38bdf8); margin-bottom:8px;">
           // 04 — SKILLS</div>
         <h2
           style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(40px,5vw,72px); line-height:.95; margin:0 0 50px; text-transform:uppercase; letter-spacing:-.01em;">
@@ -652,7 +653,7 @@
           Beyond the tools</div>
         <div data-soft-grid style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
           <sc-for list="{{ softSkills }}" as="ss" hint-placeholder-count="3">
-            <div style="border-top:2px solid var(--accent,#ff4d2e); padding-top:16px;">
+            <div style="border-top:2px solid var(--accent,#38bdf8); padding-top:16px;">
               <h4
                 style="font-family:'Saira Condensed',sans-serif; font-weight:600; font-size:20px; margin:0 0 8px; text-transform:uppercase; letter-spacing:.01em;">
                 {{ ss.title }}</h4>
@@ -668,7 +669,7 @@
     <section id="projects" data-section style="padding:90px 8vw; max-width:1180px; margin:0 auto;">
       <div data-panel style="will-change:transform,opacity; transform-origin:center;">
         <div
-          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:8px;">
+          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#38bdf8); margin-bottom:8px;">
           // 05 — PROJECTS</div>
         <h2
           style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(40px,5vw,72px); line-height:.95; margin:0 0 50px; text-transform:uppercase; letter-spacing:-.01em;">
@@ -678,7 +679,7 @@
         <sc-for list="{{ projects }}" as="p" hint-placeholder-count="6">
           <div data-panel
             style="will-change:transform,opacity; transform-origin:center; background:linear-gradient(180deg, var(--card-from), var(--card-to)); border:1px solid var(--border-card); border-radius:4px; padding:20px 22px; display:flex; flex-direction:column;"
-            style-hover="border-color:var(--accent,#ff4d2e)">
+            style-hover="border-color:var(--accent,#38bdf8)">
             <div
               style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px;">
               <span
@@ -692,7 +693,7 @@
               style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:21px; line-height:1.05; margin:0 0 4px; letter-spacing:.01em;">
               {{ p.name }}</h3>
             <div
-              style="color:var(--accent,#ff4d2e); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.04em; margin-bottom:10px; min-height:12px;">
+              style="color:var(--accent,#38bdf8); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.04em; margin-bottom:10px; min-height:12px;">
               {{ p.role }}</div>
             <p style="font-size:13px; line-height:1.55; color:var(--fg-projects); margin:0; font-weight:300;">{{ p.desc
               }}</p>
@@ -705,7 +706,7 @@
     <section id="certs" data-section style="padding:90px 8vw; max-width:1180px; margin:0 auto;">
       <div data-panel style="will-change:transform,opacity; transform-origin:center;">
         <div
-          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:8px;">
+          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#38bdf8); margin-bottom:8px;">
           // 06 — CERTIFICATIONS</div>
         <h2
           style="font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(40px,5vw,72px); line-height:.95; margin:0 0 50px; text-transform:uppercase; letter-spacing:-.01em;">
@@ -714,7 +715,7 @@
       <sc-for list="{{ certs }}" as="c" hint-placeholder-count="5">
         <div data-panel data-cert-row
           style="will-change:transform,opacity; transform-origin:center; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:22px; padding:22px 26px; border-bottom:1px solid var(--border-card);">
-          <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent,#ff4d2e);">{{ c.n
+          <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent,#38bdf8);">{{ c.n
             }}</span>
           <span
             style="font-family:'Saira Condensed',sans-serif; font-weight:600; font-size:22px; letter-spacing:.01em;">{{
@@ -730,22 +731,22 @@
     <section id="contact" data-section style="padding:120px 8vw 100px; max-width:1180px; margin:0 auto;">
       <div data-panel style="will-change:transform,opacity; transform-origin:center; text-align:center;">
         <div
-          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#ff4d2e); margin-bottom:18px;">
+          style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; color:var(--accent,#38bdf8); margin-bottom:18px;">
           // 07 — CONTACT</div>
         <h2
           style="font-family:'Saira Condensed',sans-serif; font-weight:800; font-size:clamp(46px,7vw,104px); line-height:.92; margin:0 0 16px; text-transform:uppercase; letter-spacing:-.01em;">
-          Let's build<br><span style="color:var(--accent,#ff4d2e);">something</span></h2>
+          Let's build<br><span style="color:var(--accent,#38bdf8);">something</span></h2>
         <p style="font-size:16px; color:var(--fg-faint); max-width:480px; margin:0 auto 36px; font-weight:300;">Open to
           design-engineering and autonomous-systems roles across Europe.</p>
         <a href="mailto:piyush.nikam@gmail.com"
-          style="display:inline-block; font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(22px,3vw,38px); color:var(--fg); text-decoration:none; border-bottom:2px solid var(--accent,#ff4d2e); padding-bottom:4px; letter-spacing:.01em;"
-          style-hover="color:var(--accent,#ff4d2e)">piyush.nikam@gmail.com</a>
+          style="display:inline-block; font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:clamp(22px,3vw,38px); color:var(--fg); text-decoration:none; border-bottom:2px solid var(--accent,#38bdf8); padding-bottom:4px; letter-spacing:.01em;"
+          style-hover="color:var(--accent,#38bdf8)">piyush.nikam@gmail.com</a>
         <div
           style="display:flex; justify-content:center; flex-wrap:wrap; gap:26px; margin-top:40px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.08em; color:var(--fg-dim);">
           <a href="https://linkedin.com/in/piyush-nikam" target="_blank" rel="noopener noreferrer"
-            style="color:var(--fg-dim); text-decoration:none;" style-hover="color:var(--accent,#ff4d2e)">LINKEDIN ↗</a>
+            style="color:var(--fg-dim); text-decoration:none;" style-hover="color:var(--accent,#38bdf8)">LINKEDIN ↗</a>
           <a href="https://github.com/piyxush" target="_blank" rel="noopener noreferrer"
-            style="color:var(--fg-dim); text-decoration:none;" style-hover="color:var(--accent,#ff4d2e)">GITHUB ↗</a>
+            style="color:var(--fg-dim); text-decoration:none;" style-hover="color:var(--accent,#38bdf8)">GITHUB ↗</a>
           <span>+49 15510717398</span>
           <span>INGOLSTADT · BAVARIA · DE</span>
         </div>
@@ -762,7 +763,7 @@
     <canvas id="game-canvas" style="display:block; width:100%; height:100%;"></canvas>
     <button onclick="ADGame.exit()"
       style="position:fixed; bottom:24px; right:24px; z-index:410; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; padding:10px 18px; background:rgba(8,9,11,0.85); color:rgba(170,176,184,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:2px; cursor:pointer; transition:color .2s, border-color .2s;"
-      onmouseover="this.style.color='#ff4d2e';this.style.borderColor='#ff4d2e'"
+      onmouseover="this.style.color='#38bdf8';this.style.borderColor='#38bdf8'"
       onmouseout="this.style.color='rgba(170,176,184,0.7)';this.style.borderColor='rgba(255,255,255,0.1)'">ESC &mdash;
       Exit</button>
     <button id="game-ap-btn"
@@ -772,6 +773,84 @@
     </button>
   </div>
   <script src="./game.js"></script>
+
+  <!-- Spline robot: remove the free-tier "Built with Spline" badge.
+       This must live outside <x-dc>, since that component re-renders its inner markup via
+       innerHTML, which permanently inhibits execution of any <script> tags nested inside it.
+       <x-dc> also replaces the <spline-viewer> element entirely at least once during its
+       startup render (the first instance is abandoned before ever being upgraded, so its
+       shadowRoot never appears), so this can't lock onto the first element it finds - it
+       must keep re-checking for whichever instance is currently live for a startup window.
+       The badge is actually drawn twice: once as a DOM anchor (#logo) inside the shadow root,
+       and again as a WebGL post-processing pass (app._renderer.pipeline.logoOverlayPass) that
+       composites a watermark texture directly into the rendered pixels. Both must be disabled. -->
+  <script>
+    (function () {
+      var observedRoot = null;
+      var frames = 0;
+      var MAX_FRAMES = 600; // ~10s at 60fps; covers <x-dc>'s startup re-render churn
+
+      function killLogo(root) {
+        var logo = root.querySelector('#logo');
+        if (logo) logo.remove();
+      }
+
+      function killWatermarkPass(viewer) {
+        var app = viewer._spline;
+        var pass = app && app._renderer && app._renderer.pipeline && app._renderer.pipeline.logoOverlayPass;
+        if (pass && pass.enabled) pass.enabled = false;
+      }
+
+      function attach(root) {
+        observedRoot = root;
+        killLogo(root);
+        new MutationObserver(function () { killLogo(root); })
+          .observe(root, { childList: true, subtree: true });
+      }
+
+      function tick() {
+        var viewer = document.querySelector('spline-viewer');
+        var root = viewer && viewer.shadowRoot;
+        if (viewer) killWatermarkPass(viewer);
+        if (root && root !== observedRoot) attach(root);
+        frames++;
+        if (frames < MAX_FRAMES) requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+  </script>
+
+  <!-- Spline robot: swap to a different scene for light mode.
+       Lives outside <x-dc> for the same reason as the badge-removal script above.
+       The MutationObserver handles live theme toggles for the rest of the session; the
+       bounded rAF loop only exists to keep re-applying through <x-dc>'s startup element
+       replacement, since a freshly-replaced <spline-viewer> reverts to its hardcoded
+       (dark-mode) url attribute from the HTML source. -->
+  <script>
+    (function () {
+      var DARK_URL = 'https://prod.spline.design/Mbl6eKaN5cPJizf7/scene.splinecode';
+      var LIGHT_URL = 'https://prod.spline.design/WwZ6est8Cu761tSi/scene.splinecode';
+
+      function applyTheme() {
+        var viewer = document.querySelector('spline-viewer');
+        if (!viewer) return;
+        var theme = document.documentElement.getAttribute('data-theme') || 'dark';
+        var url = theme === 'light' ? LIGHT_URL : DARK_URL;
+        if (viewer.getAttribute('url') !== url) viewer.setAttribute('url', url);
+      }
+
+      new MutationObserver(applyTheme)
+        .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+      var frames = 0;
+      var MAX_FRAMES = 600; // ~10s at 60fps; covers <x-dc>'s startup re-render churn
+      (function tick() {
+        applyTheme();
+        frames++;
+        if (frames < MAX_FRAMES) requestAnimationFrame(tick);
+      })();
+    })();
+  </script>
 
   <!-- GitHub auto-projects: repos tagged with topic "portfolio" appear here automatically -->
   <script>
@@ -802,7 +881,7 @@
           'flex-direction:column',
           'transition:border-color .2s',
         ].join(';');
-        el.addEventListener('mouseover', function () { el.style.borderColor = 'var(--accent,#ff4d2e)'; });
+        el.addEventListener('mouseover', function () { el.style.borderColor = 'var(--accent,#38bdf8)'; });
         el.addEventListener('mouseout', function () { el.style.borderColor = ''; });
         el.innerHTML =
           '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px;">' +
@@ -810,11 +889,11 @@
             '<span style="font-family:\'JetBrains Mono\',monospace;font-size:11px;letter-spacing:.06em;color:var(--fg-dim);text-align:right;white-space:nowrap;">' + date + '</span>' +
           '</div>' +
           '<h3 style="font-family:\'Saira Condensed\',sans-serif;font-weight:700;font-size:26px;line-height:1.05;margin:0 0 6px;letter-spacing:.01em;">' + name + '</h3>' +
-          '<div style="color:var(--accent,#ff4d2e);font-family:\'JetBrains Mono\',monospace;font-size:12px;letter-spacing:.04em;margin-bottom:14px;min-height:14px;">' + (lang || 'Open Source') + '</div>' +
+          '<div style="color:var(--accent,#38bdf8);font-family:\'JetBrains Mono\',monospace;font-size:12px;letter-spacing:.04em;margin-bottom:14px;min-height:14px;">' + (lang || 'Open Source') + '</div>' +
           '<p style="font-size:14.5px;line-height:1.6;color:var(--fg-projects);margin:0 0 auto;font-weight:300;flex:1;">' + (desc || '') + '</p>' +
           '<a href="' + url + '" target="_blank" rel="noopener noreferrer" ' +
             'style="margin-top:16px;display:inline-flex;align-items:center;gap:6px;font-family:\'JetBrains Mono\',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-dim);text-decoration:none;padding-top:12px;border-top:1px solid var(--border-card);" ' +
-            'onmouseover="this.style.color=\'var(--accent,#ff4d2e)\'" onmouseout="this.style.color=\'var(--fg-dim)\'">GitHub ↗</a>';
+            'onmouseover="this.style.color=\'var(--accent,#38bdf8)\'" onmouseout="this.style.color=\'var(--fg-dim)\'">GitHub ↗</a>';
         return el;
       }
 
@@ -874,10 +953,10 @@
     })();
   </script>
   <script type="text/x-dc" data-dc-script
-    data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#ff4d2e&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;enable3D&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;intensity&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:2,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;}}">
+    data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#38bdf8&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;enable3D&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;intensity&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:2,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;}}">
 class Component extends DCLogic {
   renderVals() {
-    const accent = this.props.accent ?? '#ff4d2e';
+    const accent = this.props.accent ?? '#38bdf8';
     const mk = (id) => () => {
       const el = document.getElementById(id);
       if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 40, behavior: 'smooth' });
@@ -971,11 +1050,9 @@ class Component extends DCLogic {
     const tick = () => {
       const enabled = this.props.enable3D ?? true;
       const intensity = this.props.intensity ?? 1;
-      const accent = this.props.accent ?? '#ff4d2e';
+      const accent = this.props.accent ?? '#38bdf8';
       const root = document.documentElement;
       root.style.setProperty('--accent', accent);
-      root.style.setProperty('--mx', (this.mouse.x * 100).toFixed(2) + '%');
-      root.style.setProperty('--my', (this.mouse.y * 100).toFixed(2) + '%');
 
       const vh = window.innerHeight;
       document.querySelectorAll('[data-panel]').forEach((el) => {
@@ -1032,7 +1109,7 @@ class Component extends DCLogic {
     const THREE = window.THREE;
     if (!THREE) { this._threeTimer = setTimeout(() => this.initThree(), 120); return; }
 
-    let accentHex = this.props.accent ?? '#ff4d2e';
+    let accentHex = this.props.accent ?? '#38bdf8';
     const accent = new THREE.Color(accentHex);
     const cell = 1;
 
@@ -1144,7 +1221,7 @@ class Component extends DCLogic {
         detections.forEach(d => { if (d.material) d.material.color.set(isLight ? 0x5a6580 : 0xd6dbe1); });
       }
 
-      const cur = this.props.accent ?? '#ff4d2e';
+      const cur = this.props.accent ?? '#38bdf8';
       if (cur !== accentHex) { accentHex = cur; const c = new THREE.Color(cur); tintTargets.forEach(m => m.color.set(c)); }
 
       grid.position.z = (t * 4) % cell;
