@@ -654,6 +654,14 @@
         <span class="play-text" style="font-size:9px; pointer-events:none;">GAME</span>
       </button>
 
+      <button id="duel-btn"
+        style="position:absolute; left:75%; top:62%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; width:80px; height:80px; background:transparent; color:var(--fg,#f2f3f5); border:1px solid var(--border-btn,rgba(255,255,255,.22)); border-radius:50%; cursor:pointer; font-family:'JetBrains Mono',monospace; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:0; z-index:10; transition:border-color .15s,color .15s;"
+        onmouseover="this.style.borderColor='var(--accent,#38bdf8)';this.style.color='var(--accent,#38bdf8)'"
+        onmouseout="this.style.borderColor='var(--border-btn,rgba(255,255,255,.22))';this.style.color='var(--fg,#f2f3f5)'">
+        <span style="font-size:20px; line-height:1; pointer-events:none;">🦾</span>
+        <span style="font-size:8px; pointer-events:none;">ROBOT ARM</span>
+      </button>
+
       <div
         style="position:absolute; bottom:34px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:var(--fg-footer); display:flex; flex-direction:column; align-items:center; gap:8px; animation:floaty 2.6s ease-in-out infinite;">
         Scroll
@@ -874,6 +882,36 @@
   </div>
   <script src="./game.js"></script>
 
+  <!-- ROBOT ARM OVERLAY -->
+  <div id="robo-arm-overlay" style="display:none; opacity:0; position:fixed; inset:0; z-index:400; background:#0a0c10; transition:opacity .3s ease;"></div>
+  <script src="./robo-arm.js"></script>
+  <script>
+    (function () {
+      var overlay = document.getElementById('robo-arm-overlay');
+      var inited = false;
+      var wiredBtn = null;
+
+      // #duel-btn lives inside <x-dc>, which React replaces wholesale during
+      // its startup render (same reason the theme-swap and badge-removal
+      // scripts elsewhere in this file poll instead of wiring up once) - the
+      // element this script sees at parse time isn't the one that ends up
+      // live on the page, so keep re-checking for whichever instance is.
+      var frames = 0, MAX_FRAMES = 600;
+      (function tick() {
+        var btn = document.getElementById('duel-btn');
+        if (btn && btn !== wiredBtn) {
+          wiredBtn = btn;
+          btn.addEventListener('click', function () {
+            if (!inited) { RoboArm.init(overlay); inited = true; }
+            RoboArm.open();
+          });
+        }
+        frames++;
+        if (frames < MAX_FRAMES) requestAnimationFrame(tick);
+      })();
+    })();
+  </script>
+
   <!-- Spline robot: remove the free-tier "Built with Spline" badge.
        This must live outside <x-dc>, since that component re-renders its inner markup via
        innerHTML, which permanently inhibits execution of any <script> tags nested inside it.
@@ -887,6 +925,7 @@
   <script>
     (function () {
       var observedRoot = null;
+      var observedViewer = null;
       var frames = 0;
       var MAX_FRAMES = 600; // ~10s at 60fps; covers <x-dc>'s startup re-render churn
 
@@ -901,18 +940,32 @@
         if (pass && pass.enabled) pass.enabled = false;
       }
 
-      function attach(root) {
+      function attachShadowObserver(root) {
         observedRoot = root;
         killLogo(root);
         new MutationObserver(function () { killLogo(root); })
           .observe(root, { childList: true, subtree: true });
       }
 
+      // onLoaded() in the viewer's own code unconditionally re-shows the DOM
+      // logo and re-enables the watermark pass on every scene load, not just
+      // the first - so the theme toggle's unload()/reload (see the scene-swap
+      // script below) brings the badge right back once the startup window
+      // below has elapsed. Re-kill it after every load, for the page's life.
+      function attachLoadListener(viewer) {
+        observedViewer = viewer;
+        viewer.addEventListener('load-complete', function () {
+          killWatermarkPass(viewer);
+          if (viewer.shadowRoot) killLogo(viewer.shadowRoot);
+        });
+      }
+
       function tick() {
         var viewer = document.querySelector('spline-viewer');
         var root = viewer && viewer.shadowRoot;
         if (viewer) killWatermarkPass(viewer);
-        if (root && root !== observedRoot) attach(root);
+        if (root && root !== observedRoot) attachShadowObserver(root);
+        if (viewer && viewer !== observedViewer) attachLoadListener(viewer);
         frames++;
         if (frames < MAX_FRAMES) requestAnimationFrame(tick);
       }
@@ -936,7 +989,14 @@
         if (!viewer) return;
         var theme = document.documentElement.getAttribute('data-theme') || 'dark';
         var url = theme === 'light' ? LIGHT_URL : DARK_URL;
-        if (viewer.getAttribute('url') !== url) viewer.setAttribute('url', url);
+        if (viewer.getAttribute('url') !== url) {
+          // spline-viewer's own load() silently no-ops once a scene is already
+          // loaded and the WebGL context is healthy - it never checks whether
+          // `url` actually changed in that case. unload() first resets its
+          // internal _loaded flag so the swap to the new scene actually runs.
+          if (viewer._loaded) viewer.unload();
+          viewer.setAttribute('url', url);
+        }
       }
 
       new MutationObserver(applyTheme)
@@ -1151,10 +1211,27 @@ class Component extends DCLogic {
       const enabled = this.props.enable3D ?? true;
       const intensity = this.props.intensity ?? 1;
       const accent = this.props.accent ?? '#38bdf8';
+      const scrollY = window.scrollY;
+      const vh = window.innerHeight;
+      const vw = window.innerWidth;
+      const mx = this.mouse.x, my = this.mouse.y;
+
+      // Every value below is a pure function of these inputs (no easing/lerp
+      // state to advance) - if none of them moved since last frame, re-running
+      // the panel/section queries and getBoundingClientRect calls below would
+      // just recompute the same styles. Skip the work entirely while idle
+      // (the common case - reading, not scrolling or moving the mouse) instead
+      // of re-querying and re-measuring every element in the page 60x/sec.
+      const sig = enabled + '|' + intensity + '|' + accent + '|' + scrollY + '|' + vh + '|' + vw + '|' + mx + '|' + my;
+      if (sig === this._lastTickSig) {
+        this.raf = requestAnimationFrame(tick);
+        return;
+      }
+      this._lastTickSig = sig;
+
       const root = document.documentElement;
       root.style.setProperty('--accent', accent);
 
-      const vh = window.innerHeight;
       document.querySelectorAll('[data-panel]').forEach((el) => {
         const r = el.getBoundingClientRect();
         const d = (r.top + r.height / 2 - vh / 2) / vh;
@@ -1171,13 +1248,13 @@ class Component extends DCLogic {
       });
 
       const hero = document.querySelector('[data-hero-title]');
-      if (hero) hero.style.transform = `translateY(${(window.scrollY * -0.12).toFixed(1)}px)`;
+      if (hero) hero.style.transform = `translateY(${(scrollY * -0.12).toFixed(1)}px)`;
 
       const tilt = document.querySelector('[data-tilt]');
       if (tilt) {
         if (enabled) {
-          const rx = (this.mouse.y - 0.5) * -14 * intensity;
-          const ry = (this.mouse.x - 0.5) * 16 * intensity;
+          const rx = (my - 0.5) * -14 * intensity;
+          const ry = (mx - 0.5) * 16 * intensity;
           tilt.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
         } else { tilt.style.transform = ''; }
       }
@@ -1193,7 +1270,7 @@ class Component extends DCLogic {
       });
 
       const scrollMax = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const p = scrollMax > 0 ? window.scrollY / scrollMax : 0;
+      const p = scrollMax > 0 ? scrollY / scrollMax : 0;
       const bar = document.querySelector('[data-progress]');
       if (bar) bar.style.transform = `scaleX(${p.toFixed(4)})`;
 
@@ -1309,6 +1386,15 @@ class Component extends DCLogic {
     let prevTheme = null;
 
     const render = () => {
+      // This canvas is opacity:0 and fully superseded by spline-viewer at
+      // >=768px (see the @media rule above) - it was still rendering a full
+      // second WebGL scene nobody could see, competing with spline-viewer
+      // for the same GPU every frame. Skip the update+render pass whenever
+      // it's not the visible background, and whenever the tab itself isn't.
+      if (window.innerWidth >= 768 || document.hidden) {
+        this.threeRaf = requestAnimationFrame(render);
+        return;
+      }
       const dt = Math.min(clock.getDelta(), 0.05);
       const t = clock.getElapsedTime();
 
